@@ -56,4 +56,4 @@ readme 格式参考[github](https://github.com/JiaxiangBU/phv)
 
 <h4 align="center">**License**</h4>
 
-<h6 align="center">GPL-3 &copy; [Jiaxiang Li;Ruiqi Wu;Xiaosong Jin](LICENSE.md)</h6>
+<h6 align="center">GPL-3 &copy; [Jiaxiang Li;Ruiqi Wu;Xiaosong Jin](LICENSE)</h6>

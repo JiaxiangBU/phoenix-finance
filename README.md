@@ -63,6 +63,6 @@ project, you agree to abide by its terms.
 
 <h6 align="center">
 
-GPL-3 © [Jiaxiang Li;Ruiqi Wu;Xiaosong Jin](LICENSE.md)
+GPL-3 © [Jiaxiang Li;Ruiqi Wu;Xiaosong Jin](LICENSE)
 
 </h6>
