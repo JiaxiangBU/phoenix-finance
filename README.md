@@ -1,7 +1,7 @@
 凤凰金融 (Phoenix Finance) 量化投资大赛 参赛笔记
 ================
 李家翔,武睿琦,靳晓松
-2019-01-31
+2019-03-18
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
@@ -49,9 +49,9 @@ readme 格式参考[github](https://github.com/JiaxiangBU/phv)
 
 <h6 align="center">
 
-Please note that the ‘add2md’ project is released with a [Contributor
-Code of Conduct](.github/CODE_OF_CONDUCT.md).<br>By contributing to this
-project, you agree to abide by its terms.
+Please note that the ‘phoenix-finance’ project is released with a
+[Contributor Code of Conduct](CODE_OF_CONDUCT.md). By contributing to
+this project, you agree to abide by its terms.
 
 </h6>
 
