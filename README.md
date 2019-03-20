@@ -1,7 +1,7 @@
 凤凰金融 (Phoenix Finance) 量化投资大赛 参赛笔记
 ================
 李家翔,武睿琦,靳晓松
-2019-03-18
+2019-03-20
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
@@ -34,6 +34,8 @@
 
 相比于 [phv](https://github.com/JiaxiangBU/phv)， 这算是早期项目，因此我们没有尝试深度学习
 (RNN相关) 模型。
+
+另外参考 [预测值迁移](https://jiaxiangbu.github.io/channel_valuation/about) 的问题。
 
 ### 其他
 
