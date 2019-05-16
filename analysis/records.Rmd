@@ -1,0 +1,303 @@
+# 晓松
+
+![](http://p24kaozv6.bkt.clouddn.com/xiaosong_20180426_01.png)
+
+这里未加入时间限制，但是其实也非常简单，只要加入`filter()`，中间限制`rank`即可。
+例如
+
+```{r eval=F}
+x %>% 
+  select(rank,code,return) %>% 
+  filter(rank > 343, rank < 353)
+```
+
+
+但是我感觉`get_alpha_beta_pvalue `这个函数进行了更新，你可以参考现在最新的函数，
+
+地址: http://p24kaozv6.bkt.clouddn.com/fcontest_output17.html
+书签: 2.7.3.3 α,β,p value
+
+
+![](http://p24kaozv6.bkt.clouddn.com/xiaosong_20180426_02.png)
+
+> 还有就是我使用你的get_alpha_beta_pvalue的方法，在加入期数的限制（343-353）得到的结果是下图这样的 ，还需要平移吗？
+
+
+我没有看懂平移的意思，但是我觉得这个函数似乎报错了，p value都是空值，这应该不对，你可以先把你的`data_alpha_beta_pvalue`
+提取出来，看看缺失率。
+
+> 我没有对其进行平移 然后最后挑选的结果与之前我给你提到的“不重复数据”的股票组选择一样
+
+> 但是始终没有解决掉 为啥和“重复数据”结果不同的问题 哈哈
+
+重复数据这点我没有看懂，你可以解释一下吗？
+
+## 平移转换
+
+```{r}
+a <- -0.9
+b <- 0.8
+
+a^b
+
+# 处理方式一
+abs(a)^b*ifelse(a > 0, 1,-1)
+
+# 处理方式二
+
+(a+2)^b
+```
+
+## 重复问题
+
+![](http://p24kaozv6.bkt.clouddn.com/xiaosong_20180426_03.png)
+![](http://p24kaozv6.bkt.clouddn.com/xiaosong_20180426_04.png)
+
+晓松根据你给我的这两个图，其实他们是一回事。
+
+因为一个回归方程，
+
+$$y = \beta_0 + \beta_1 x + \mu$$
+
+假设，
+$y: [y_1,y_2,\cdots,y_{30}]$
+$x: [x_1,x_2,\cdots,x_{30}]$
+
+我们一定会得到
+
+$\hat y: [\hat y_1,\hat y_2,\cdots,\hat y_{30}]$
+
+但是只有一个$\hat \beta_0$和$\hat \beta_1$，因此你会看到重复值，但是都不矛盾的，
+
+我建议你对重复值的图做这个处理，`distinct(everything())`，理论上你会得到两个一样的结果。
+你可以用`setequal`进行验证。
+
+## debug的思路
+
+每段函数如果出了问题，input和output如果是数据，存成csv，这样方便debug。
+
+
+我觉得可能我们原数据不一样，使用的时候，所以我要看你的input，如果是你的input和我一样，output不一样，那么我的函数，估计在win和mac上不兼容，要修改。
+
+嗯，你直接传你进函数的input给我好了，下次有bug，你直接`write_csv`一下先，日后好查证。
+
+
+## `get_alpha_beta_pvalue2.0`
+
+```{r eval=F}
+get_alpha_beta_pvalue2.0 <- function(x, start=343, end=353) {
+x %>% 
+  filter(rank >= start & rank <= end) %>%
+  # filter(code %in% NaN_code[1:2]) %>%
+  split(.$code) %>% 
+  map(.x = ., ~lm(return ~ PC1_return, data = .x)) %>% 
+  map(~summary(.x)$coefficients) %>% 
+  as.data.frame() %>% 
+  add_rownames() %>% 
+  gather_(
+    key_col = "key",
+    value_col = "value",
+    gather_cols = names(.) %>% str_subset("stock")) %>% 
+  # anyNA()
+  # 没有空值了
+  filter(!key %in% str_subset(key,"Std..Error|t.value")) %>% 
+  mutate(
+    rowname = fct_recode(rowname,alpha = "(Intercept)",beta = "PC1_return"),
+    key = str_replace_all(key,"Estimate","value"),
+    key = str_replace_all(key,"Pr...t..","p_value")
+  ) %>% 
+  separate(col = "key",into = c("code","type"),sep = "\\.") %>% 
+  unite(col = "type",c("rowname","type")) %>% 
+  spread(type,value)
+  # anyNA()
+}
+```
+
+### debug过程
+
+```{r}
+get_alpha_beta_pvalue2.0(all_data) %>% anyNA()
+```
+
+```{r eval=F}
+all_data %>% 
+  filter(code %in% NaN_code[1:2]) %>%
+  split(.$code) %>% 
+  map(.x = ., ~lm(return ~ PC1_return, data = .x)) %>% 
+  map(~summary(.x)$coefficients)
+```
+
+`summary` 函数的求解是没有问题的，那么就是`tidy`函数的问题了。
+
+函数重新封装，换`summary`函数。
+
+```{r eval=F}
+all_data %>% 
+  filter(code %in% NaN_code[1]) %>% 
+  lm(return ~ PC1_return, data = .) %>% 
+  summary() %>% 
+  .$coefficients
+```
+
++ `stock100310`
++ `rank >= 343 & rank <= 353`
+
+rank 不能太小。
+
+
+# 武神
+
+我看了下`makeMeasure`函数的参数，暂时没找到对$\beta$进行约束的方法（可能我没有认真看明白），这个你之前直接构建过lasso或者ridge的损失函数吗？
+我觉得我的自定义函数，需要考虑对$\beta$进行约束，这个是一般R包的难点。
+
+参考链接: 
+
+* [makeMeasure function | R Documentation](https://www.rdocumentation.org/packages/mlr/versions/2.12.1/topics/makeMeasure)
+* [Create Custom Measures - mlr tutorial](https://mlr-org.github.io/mlr-tutorial/release/html/create_measure/index.html)
+
+## adjacent coefficients
+
+这里的$i$表示样本数，$j$表示$\beta$数量。
+
+
+## 武神的代码
+
+<!-- ```{r} -->
+<!-- library(data.table) -->
+<!-- library(mlr) -->
+<!-- ## Define a function that calculates the misclassification rate -->
+<!-- my.versicolor.fun = function(task, model, pred, feats, extra.args) { -->
+<!--   tb = table(getPredictionResponse(pred), getPredictionTruth(pred)) -->
+<!--   sum(tb[2,2])/(sum(tb[2,]) + 0.000001) -->
+<!-- } -->
+
+<!-- ## Generate the Measure object -->
+<!-- my.virginica = makeMeasure( -->
+<!--   id = "my.versicolor", name = "My Mean Misclassification Error", -->
+<!--   properties = c("classif", "classif.multi", "req.pred", "req.truth"), -->
+<!--   minimize = FALSE, best = 1, worst = 0, -->
+<!--   fun = my.versicolor.fun -->
+<!-- )#minimize -->
+<!-- ``` -->
+
+<!-- ```{r} -->
+<!-- head(iris) -->
+<!-- #iris2 <- iris[sample(1:150,10000,replace = T),] -->
+<!-- task.iris <- makeClassifTask(data = iris,target = 'Species') -->
+<!-- lrn.iris <- makeLearner('classif.xgboost',predict.type = 'prob') -->
+<!-- set.seed(125) -->
+<!-- train.set <- sample(1:150,120) -->
+<!-- test.set <- setdiff(1:150,train.set) -->
+<!-- model = train(lrn.iris,task.iris,subset = train.set) -->
+<!-- pred = predict(model,task.iris,subset = test.set) -->
+<!-- ``` -->
+
+<!-- ```{r} -->
+<!-- calculateConfusionMatrix(pred) -->
+<!-- performance(pred,measures = list(acc,my.virginica)) -->
+<!-- ``` -->
+
+<!-- ```{r} -->
+<!-- discrete_ps = makeParamSet( -->
+<!--       makeNumericParam("eta", lower = 0, upper = 1), -->
+<!--       makeNumericParam("gamma", lower = 0, upper = 50),#upper=Inf -->
+<!--       makeDiscreteParam("max_depth",values=c(1:20)), -->
+<!--       makeNumericParam("min_child_weight", lower = 0, upper = 50),#upper=Inf -->
+<!--       makeNumericParam("max_delta_step", lower = 0, upper = 50), -->
+<!--       makeDiscreteParam("nrounds",values=c(1:20))#1 to Inf -->
+<!--       ) -->
+
+<!-- # 设置重抽样实例 -->
+<!-- #rdesc = makeResampleDesc("CV", iters = 10) -->
+<!-- rin = makeFixedHoldoutInstance(train.inds = train.set, test.inds = test.set, size = 150) -->
+
+<!-- #设置调参控制 -->
+<!-- ctrl = makeTuneControlRandom(same.resampling.instance = TRUE, maxit = 100)#,tune.threshold = TRUE -->
+<!-- # 调参 -->
+<!-- res = tuneParams(lrn.iris, task.iris, resampling = rin,par.set = discrete_ps, control = ctrl,measures = list(acc), show.info = TRUE)#resampling = rin -->
+<!-- ``` -->
+
+<!-- ```{r} -->
+<!-- lrn.tune <- makeLearner('classif.xgboost',predict.type = 'prob',par.vals = list(eta = res$x[[1]],gamma = res$x[[2]],max_depth = res$x[[3]],min_child_weight = res$x[[4]],max_delta_step = res$x[[5]],nrounds = res$x[[6]])) -->
+
+<!-- model.tune = train(lrn.tune,task.iris,subset = train.set) -->
+<!-- pred.tune = predict(model.tune,task.iris,subset = test.set) -->
+<!-- calculateConfusionMatrix(pred.tune) -->
+<!-- performance(pred.tune,measures = list(acc,my.virginica)) -->
+<!-- ``` -->
+
+<!-- 你看看这个资料，我目前自定义损失函数主要是靠这个。 -->
+
+<!-- 下面是我昨天做的一个小测试，但是结果很怪，估计是哪有问题我还没搞清楚。大概套路就是这样 -->
+
+<!-- ```{r} -->
+<!-- library(data.table) -->
+<!-- library(mlr) -->
+<!-- ## Define a function that calculates the misclassification rate -->
+<!-- my.virginica.fun = function(task, model, pred, feats, extra.args) { -->
+<!--   tb = table(getPredictionResponse(pred), getPredictionTruth(pred)) -->
+<!--   sum(tb[3,3])/(sum(tb[3,]) + 0.000001) -->
+<!-- } -->
+
+<!-- ## Generate the Measure object -->
+<!-- my.virginica = makeMeasure( -->
+<!--   id = "my.versicolor", name = "My Mean Misclassification Error", -->
+<!--   properties = c("classif", "classif.multi", "req.pred", "req.truth"), -->
+<!--   minimize = FALSE, best = 1, worst = 0, -->
+<!--   fun = my.virginica.fun -->
+<!-- )#minimize -->
+<!-- ``` -->
+
+<!-- 最前面的损失函数应该用这个， -->
+
+<!-- 关于损失函数我了解的也比较少，你要有什么好资料也共享一下 -->
+
+<!-- ```{r} -->
+<!-- ## Create the cost matrix -->
+<!-- costs = matrix(c(0, 0, 0, 0, 0, 0, 0, 5, 0), ncol = 3) -->
+<!-- rownames(costs) = colnames(costs) = getTaskClassLevels(iris.task) -->
+
+<!-- ## Encapsulate the cost matrix in a Measure object -->
+<!-- my.costs = makeCostMeasure( -->
+<!--   id = "my.costs", name = "My Costs", -->
+<!--   costs = costs, -->
+<!--   minimize = TRUE, best = 0, worst = 5 -->
+<!-- ) -->
+
+<!-- ## Train a learner and make a prediction -->
+<!-- mod = train(lrn.iris, iris.task) -->
+<!-- pred = predict(mod, newdata = iris) -->
+
+<!-- ## Calculate the average costs -->
+<!-- performance(pred, measures = my.costs) -->
+<!-- ``` -->
+
+<!-- ```{r} -->
+<!-- res3 = tuneParams(lrn.iris, task.iris, resampling = rin,par.set = discrete_ps, control = ctrl,measures = list(my.costs), show.info = FALSE)#resampling = rin -->
+<!-- ``` -->
+
+<!-- ```{r} -->
+<!-- lrn.cost <- makeLearner('classif.xgboost',predict.type = 'prob',par.vals = list(eta = res3$x[[1]],gamma = res3$x[[2]],max_depth = res3$x[[3]],min_child_weight = res3$x[[4]],max_delta_step = res3$x[[5]],nrounds = res3$x[[6]])) -->
+
+<!-- model.cost = train(lrn.cost,task.iris,subset = train.set) -->
+<!-- pred.cost = predict(model.cost,task.iris,subset = test.set) -->
+<!-- calculateConfusionMatrix(pred.cost) -->
+<!-- performance(pred.cost,measures = list(my.virginica,my.costs)) -->
+<!-- ``` -->
+
+<!-- ```{r} -->
+<!-- res3 = tuneParams(lrn.iris, task.iris, resampling = rin,par.set = discrete_ps, control = ctrl,measures = list(my.costs), show.info = FALSE)#resampling = rin -->
+<!-- ``` -->
+
+<!-- ```{r} -->
+<!-- lrn.cost <- makeLearner('classif.xgboost',predict.type = 'prob',par.vals = list(eta = res3$x[[1]],gamma = res3$x[[2]],max_depth = res3$x[[3]],min_child_weight = res3$x[[4]],max_delta_step = res3$x[[5]],nrounds = res3$x[[6]])) -->
+
+<!-- model.cost = train(lrn.cost,task.iris,subset = train.set) -->
+<!-- pred.cost = predict(model.cost,task.iris,subset = test.set) -->
+<!-- calculateConfusionMatrix(pred.cost) -->
+<!-- performance(pred.cost,measures = list(my.virginica,my.costs)) -->
+<!-- ``` -->
+
+<!-- 还有一个类似的调整方法，就是成本敏感型的方法，通过定义成本矩阵的方法来进行 -->
+
+<!-- 我初步的理解是，前面的方法是定义损失，但每一类的损失汇总之后才是总体的损失，一般的情况下我们的汇总是平等的看待每一个样本的损失的，但cost是调整了不同分类损失的权重，其实是调整各类损失的汇总方法。不知道对不对，你先研究研究 -->
