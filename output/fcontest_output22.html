@@ -1,0 +1,2024 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>数据解释和代码</title>
+  <meta name="description" content="数据解释和代码">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+
+  <meta property="og:title" content="数据解释和代码" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="数据解释和代码" />
+  
+  
+  
+
+<meta name="author" content="李家翔">
+
+
+<meta name="date" content="2018-04-30">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<link href="libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="libs/pagedtable-1.1/js/pagedtable.js"></script>
+<script src="libs/htmlwidgets-1.0/htmlwidgets.js"></script>
+<link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="libs/datatables-binding-0.4/datatables.js"></script>
+<link href="libs/dt-core-1.10.16/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.10.16/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.10.16/js/jquery.dataTables.min.js"></script>
+<link href="libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path=""><a href="#section-1"><i class="fa fa-check"></i><b>1</b> 前言</a><ul>
+<li class="chapter" data-level="1.1" data-path=""><a href="#section-1.1"><i class="fa fa-check"></i><b>1.1</b> 文件注释(整合成表格)</a></li>
+<li class="chapter" data-level="1.2" data-path=""><a href="#section-1.2"><i class="fa fa-check"></i><b>1.2</b> 新增</a></li>
+<li class="chapter" data-level="1.3" data-path=""><a href="#section-1.3"><i class="fa fa-check"></i><b>1.3</b> 比赛要求</a></li>
+<li class="chapter" data-level="1.4" data-path=""><a href="#debug"><i class="fa fa-check"></i><b>1.4</b> debug思路</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path=""><a href="#section-2"><i class="fa fa-check"></i><b>2</b> 数据处理</a><ul>
+<li class="chapter" data-level="2.1" data-path=""><a href="#section-2.1"><i class="fa fa-check"></i><b>2.1</b> 合并数据</a><ul>
+<li class="chapter" data-level="2.1.1" data-path=""><a href="#round1round20"><i class="fa fa-check"></i><b>2.1.1</b> <code>round1</code>和<code>round2</code>是否交集为0</a></li>
+<li class="chapter" data-level="2.1.2" data-path=""><a href="#-closed."><i class="fa fa-check"></i><b>2.1.2</b> 合并数据 closed.</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path=""><a href="#section-2.2"><i class="fa fa-check"></i><b>2.2</b> 交易日历</a></li>
+<li class="chapter" data-level="2.3" data-path=""><a href="#-top-10"><i class="fa fa-check"></i><b>2.3</b> 剔除收盘价数据缺失 top 10%</a><ul>
+<li class="chapter" data-level="2.3.1" data-path=""><a href="#section-2.3.1"><i class="fa fa-check"></i><b>2.3.1</b> 10%的名单</a></li>
+<li class="chapter" data-level="2.3.2" data-path=""><a href="#boxplot-outlier-detector"><i class="fa fa-check"></i><b>2.3.2</b> boxplot outlier detector</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path=""><a href="#section-2.4"><i class="fa fa-check"></i><b>2.4</b> 是否有超过涨跌停板的价格</a></li>
+<li class="chapter" data-level="2.5" data-path=""><a href="#section-2.5"><i class="fa fa-check"></i><b>2.5</b> 插入半年收益率</a><ul>
+<li class="chapter" data-level="2.5.1" data-path=""><a href="#section-2.5.1"><i class="fa fa-check"></i><b>2.5.1</b> 逻辑</a></li>
+<li class="chapter" data-level="2.5.2" data-path=""><a href="#t"><i class="fa fa-check"></i><b>2.5.2</b> <span class="math inline">\(t\)</span>的取值范围</a></li>
+<li class="chapter" data-level="2.5.3" data-path=""><a href="#-head"><i class="fa fa-check"></i><b>2.5.3</b> 选择 head</a></li>
+<li class="chapter" data-level="2.5.4" data-path=""><a href="#delta"><i class="fa fa-check"></i><b>2.5.4</b> 选择需要处理<span class="math inline">\(\Delta\)</span>的因子</a></li>
+<li class="chapter" data-level="2.5.5" data-path=""><a href="#section-2.5.5"><i class="fa fa-check"></i><b>2.5.5</b> 计算</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path=""><a href="#section-2.6"><i class="fa fa-check"></i><b>2.6</b> 风险分层</a></li>
+<li class="chapter" data-level="2.7" data-path=""><a href="#section-2.7"><i class="fa fa-check"></i><b>2.7</b> 标准化</a></li>
+<li class="chapter" data-level="2.8" data-path=""><a href="#pca"><i class="fa fa-check"></i><b>2.8</b> PCA构建大盘指数</a><ul>
+<li class="chapter" data-level="2.8.1" data-path=""><a href="#section-2.8.1"><i class="fa fa-check"></i><b>2.8.1</b> 要求</a></li>
+<li class="chapter" data-level="2.8.2" data-path=""><a href="#section-2.8.2"><i class="fa fa-check"></i><b>2.8.2</b> 详细内容</a></li>
+<li class="chapter" data-level="2.8.3" data-path=""><a href="#capmalpha"><i class="fa fa-check"></i><b>2.8.3</b> CAPM找<span class="math inline">\(\alpha\)</span></a></li>
+</ul></li>
+<li class="chapter" data-level="2.9" data-path=""><a href="#index-close"><i class="fa fa-check"></i><b>2.9</b> 增加大盘index close</a></li>
+<li class="chapter" data-level="2.10" data-path=""><a href="#y"><i class="fa fa-check"></i><b>2.10</b> y滞后项作为自变量</a><ul>
+<li class="chapter" data-level="2.10.1" data-path=""><a href="#tidyquantjiaxiangtidyquant"><i class="fa fa-check"></i><b>2.10.1</b> 利用<code>tidyquant</code>，方法二<span class="citation">(Li 2018)</span>。</a></li>
+<li class="chapter" data-level="2.10.2" data-path=""><a href="#section-2.10.2"><i class="fa fa-check"></i><b>2.10.2</b> 检查批量成功进行</a></li>
+</ul></li>
+<li class="chapter" data-level="2.11" data-path=""><a href="#x"><i class="fa fa-check"></i><b>2.11</b> 建立x滞后项</a><ul>
+<li class="chapter" data-level="2.11.1" data-path=""><a href="#delta-x"><i class="fa fa-check"></i><b>2.11.1</b> 使用<span class="math inline">\(\Delta x\)</span>进行预测</a></li>
+<li class="chapter" data-level="2.11.2" data-path=""><a href="#x"><i class="fa fa-check"></i><b>2.11.2</b> 使用<span class="math inline">\(x\)</span>进行预测</a></li>
+<li class="chapter" data-level="2.11.3" data-path=""><a href="#section-2.11.3"><i class="fa fa-check"></i><b>2.11.3</b> 代码</a></li>
+</ul></li>
+<li class="chapter" data-level="2.12" data-path=""><a href="#section-2.12"><i class="fa fa-check"></i><b>2.12</b> 行业分类</a></li>
+<li class="chapter" data-level="2.13" data-path=""><a href="#power-transformations-for-y"><i class="fa fa-check"></i><b>2.13</b> Power Transformations for <span class="math inline">\(y\)</span></a></li>
+<li class="chapter" data-level="2.14" data-path=""><a href="#section-2.14"><i class="fa fa-check"></i><b>2.14</b> 指标构建思想</a><ul>
+<li class="chapter" data-level="2.14.1" data-path=""><a href="#normalizedlog"><i class="fa fa-check"></i><b>2.14.1</b> 收益率&gt;需要normalized和log化</a></li>
+<li class="chapter" data-level="2.14.2" data-path=""><a href="#section-2.14.2"><i class="fa fa-check"></i><b>2.14.2</b> 风险&gt;权重衰减</a></li>
+<li class="chapter" data-level="2.14.3" data-path=""><a href="#section-2.14.3"><i class="fa fa-check"></i><b>2.14.3</b> 使用先验信息</a></li>
+</ul></li>
+<li class="chapter" data-level="2.15" data-path=""><a href="#section-2.15"><i class="fa fa-check"></i><b>2.15</b> 时间选择解释</a></li>
+<li class="chapter" data-level="2.16" data-path=""><a href="#arima"><i class="fa fa-check"></i><b>2.16</b> arima预测半年收益率</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path=""><a href="#section-3"><i class="fa fa-check"></i><b>3</b> 模型方法</a><ul>
+<li class="chapter" data-level="3.1" data-path=""><a href="#naive-group"><i class="fa fa-check"></i><b>3.1</b> naive group</a><ul>
+<li class="chapter" data-level="3.1.1" data-path=""><a href="#naive"><i class="fa fa-check"></i><b>3.1.1</b> naive</a></li>
+<li class="chapter" data-level="3.1.2" data-path=""><a href="#naive-2.0"><i class="fa fa-check"></i><b>3.1.2</b> naive 2.0</a></li>
+<li class="chapter" data-level="3.1.3" data-path=""><a href="#naive-3.0"><i class="fa fa-check"></i><b>3.1.3</b> naive 3.0</a></li>
+<li class="chapter" data-level="3.1.4" data-path=""><a href="#naive-4.0"><i class="fa fa-check"></i><b>3.1.4</b> naive 4.0</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path=""><a href="#mu-sigma"><i class="fa fa-check"></i><b>3.2</b> <span class="math inline">\(\mu, \sigma\)</span></a></li>
+<li class="chapter" data-level="3.3" data-path=""><a href="#linear-regression"><i class="fa fa-check"></i><b>3.3</b> linear regression</a><ul>
+<li class="chapter" data-level="3.3.1" data-path=""><a href="#sur-close"><i class="fa fa-check"></i><b>3.3.1</b> SUR close</a></li>
+<li class="chapter" data-level="3.3.2" data-path=""><a href="#ols"><i class="fa fa-check"></i><b>3.3.2</b> OLS</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path=""><a href="#hat-y2"><i class="fa fa-check"></i><b>3.4</b> 加入<span class="math inline">\({\hat y}^2\)</span></a></li>
+<li class="chapter" data-level="3.5" data-path=""><a href="#xgboost"><i class="fa fa-check"></i><b>3.5</b> xgboost</a><ul>
+<li class="chapter" data-level="3.5.1" data-path=""><a href="#import-data"><i class="fa fa-check"></i><b>3.5.1</b> import data</a></li>
+<li class="chapter" data-level="3.5.2" data-path=""><a href="#train-test-split"><i class="fa fa-check"></i><b>3.5.2</b> train test split</a></li>
+<li class="chapter" data-level="3.5.3" data-path=""><a href="#dmatrix"><i class="fa fa-check"></i><b>3.5.3</b> dmatrix</a></li>
+<li class="chapter" data-level="3.5.4" data-path=""><a href="#modeling-1"><i class="fa fa-check"></i><b>3.5.4</b> modeling</a></li>
+<li class="chapter" data-level="3.5.5" data-path=""><a href="#perf-1"><i class="fa fa-check"></i><b>3.5.5</b> perf</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path=""><a href="#xgboost-add-lag-y"><i class="fa fa-check"></i><b>3.6</b> xgboost add lag y</a></li>
+<li class="chapter" data-level="3.7" data-path=""><a href="#xgboost-classification"><i class="fa fa-check"></i><b>3.7</b> xgboost classification</a></li>
+<li class="chapter" data-level="3.8" data-path=""><a href="#section-3.8"><i class="fa fa-check"></i><b>3.8</b> 引入相关性</a><ul>
+<li class="chapter" data-level="3.8.1" data-path=""><a href="#p"><i class="fa fa-check"></i><b>3.8.1</b> 增加p值</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path=""><a href="#section-4"><i class="fa fa-check"></i><b>4</b> 检验模型效果</a><ul>
+<li class="chapter" data-level="4.1" data-path=""><a href="#geometric-mean-return"><i class="fa fa-check"></i><b>4.1</b> <code>Geometric Mean Return</code></a></li>
+<li class="chapter" data-level="4.2" data-path=""><a href="#section-4.2"><i class="fa fa-check"></i><b>4.2</b> 历史平均法</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path=""><a href="#section-5"><i class="fa fa-check"></i><b>5</b> 其他</a><ul>
+<li class="chapter" data-level="5.1" data-path=""><a href="#render"><i class="fa fa-check"></i><b>5.1</b> <code>render</code>格式</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path=""><a href="#e58f82e88083e69687e78cae"><i class="fa fa-check"></i>参考文献</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">数据解释和代码</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="header">
+<h1 class="title">数据解释和代码</h1>
+<h4 class="author"><em>李家翔</em></h4>
+<h4 class="date"><em>2018-04-30</em></h4>
+</div>
+<div id="section-1" class="section level1">
+<h1><span class="header-section-number">1</span> 前言</h1>
+<div id="section-1.1" class="section level2">
+<h2><span class="header-section-number">1.1</span> 文件注释(整合成表格)</h2>
+<div id="htmlwidget-87d0fb9d5811b2157e30" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-87d0fb9d5811b2157e30">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10","11","12","13"],["http://p24kaozv6.bkt.clouddn.com/round3_all_data.csv","http://p24kaozv6.bkt.clouddn.com/round3_all_miss_perf.csv","http://p24kaozv6.bkt.clouddn.com/round3_alpha_beta_pvalue_best_sample.csv","http://p24kaozv6.bkt.clouddn.com/round3_data_lag_y_15.csv","http://p24kaozv6.bkt.clouddn.com/round3_full_data_ipt_miss_mu_sigma_rank_by_3.csv","http://p24kaozv6.bkt.clouddn.com/round3_full_data_ipt_miss_wo_scale.csv","http://p24kaozv6.bkt.clouddn.com/round3_hclus_tag.csv","http://p24kaozv6.bkt.clouddn.com/round3_imp10_vars_w_lag_15_part1.csv","http://p24kaozv6.bkt.clouddn.com/round3_imp10_vars_w_lag_15_part2.csv","http://p24kaozv6.bkt.clouddn.com/round3_n_miss_cumsum_num_xiaosong.csv","http://p24kaozv6.bkt.clouddn.com/round3_n_miss_cumsum_xiaosong.csv","http://p24kaozv6.bkt.clouddn.com/round3_pca_index_table.csv","http://p24kaozv6.bkt.clouddn.com/round3_round3_files_upload_original.csv"],["合并数据，未处理缺失值","各股缺失值情况","z-score方法","y的连续滞后15期数据","公司聚类标签","可进入模型的数据","公司聚类标签","x的连续滞后15期数据","x的连续滞后15期数据","各股收盘价缺失情况","缺失值的分布","pca大盘指数","目录文件底稿"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>name<\/th>\n      <th>comment<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"order":[],"autoWidth":false,"orderClasses":false,"columnDefs":[{"orderable":false,"targets":0}]}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="section-1.2" class="section level2">
+<h2><span class="header-section-number">1.2</span> 新增</h2>
+<ul>
+<li>2.16 arima预测半年收益率</li>
+<li>2.10.1 利用tidyquant，方法二</li>
+<li>round3的数据全部刷好</li>
+</ul>
+</div>
+<div id="section-1.3" class="section level2">
+<h2><span class="header-section-number">1.3</span> 比赛要求</h2>
+<p>比赛对异常值处理要求还是比较高的。</p>
+<p>4月27日round2结束。</p>
+</div>
+<div id="debug" class="section level2">
+<h2><span class="header-section-number">1.4</span> debug思路</h2>
+<p>这里debug的思想，和python的<code>pdb.set_trace()</code>类似。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">get_distinct_value_leq_<span class="dv">10</span> &lt;-<span class="st"> </span><span class="cf">function</span>(x){
+  x <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(mpg <span class="op">&gt;=</span><span class="st"> </span><span class="dv">10</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(cyl) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">count</span>()
+}
+<span class="kw">get_distinct_value_leq_10</span>(mtcars)</code></pre></div>
+<p><code>%&gt;%</code>主要就是方便debug，如上面这个代码，是一个函数，这个函数应用到<code>mtcars</code>表格，将函数拆开，替换<code>x</code>为<code>mtcars</code>。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mtcars</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mtcars <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(mpg <span class="op">&gt;=</span><span class="st"> </span><span class="dv">10</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mtcars <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(mpg <span class="op">&gt;=</span><span class="st"> </span><span class="dv">10</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(cyl)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mtcars <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(mpg <span class="op">&gt;=</span><span class="st"> </span><span class="dv">10</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(cyl) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">count</span>()</code></pre></div>
+<p>然后依次的跑，这样你就可以看到每一步有什么变化，从而来debug，比如出现了NA，出现了异常值，或者跟你对照的表格<code>setequal</code>。</p>
+</div>
+</div>
+<div id="section-2" class="section level1">
+<h1><span class="header-section-number">2</span> 数据处理</h1>
+<div id="section-2.1" class="section level2">
+<h2><span class="header-section-number">2.1</span> 合并数据</h2>
+<div id="round1round20" class="section level3">
+<h3><span class="header-section-number">2.1.1</span> <code>round1</code>和<code>round2</code>是否交集为0</h3>
+<p>这个函数会很慢，不建议跑。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">get_data_nest &lt;-<span class="st"> </span><span class="cf">function</span>(x){
+<span class="kw">file.path</span>(<span class="kw">getwd</span>(),x) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">dir</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">as_tibble</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">rank =</span> <span class="kw">str_extract</span>(value,<span class="st">&quot;[:digit:]{1,4}&quot;</span>),
+         <span class="dt">rank =</span> <span class="kw">as.integer</span>(rank)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">arrange</span>(rank) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">path =</span> <span class="kw">file.path</span>(<span class="kw">getwd</span>(),<span class="st">&quot;data&quot;</span>,x,value)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">table =</span> <span class="kw">map</span>(path,read_csv))
+}
+
+equal_or_not &lt;-<span class="st"> </span><span class="cf">function</span>(x,y){
+all_data_round1 &lt;-<span class="st"> </span><span class="kw">get_data_nest</span>(x)
+all_data_round2 &lt;-<span class="st"> </span><span class="kw">get_data_nest</span>(y)
+all_data_round1_for_join &lt;-<span class="st"> </span>
+all_data_round1 <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(value,table) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">rename</span>(<span class="dt">table_round1 =</span> table)
+all_data_round2_for_join &lt;-<span class="st"> </span>
+all_data_round2 <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(value,table) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">rename</span>(<span class="dt">table_round2 =</span> table)
+all_data_round1_for_join <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">left_join</span>(all_data_round2_for_join, <span class="dt">by =</span> <span class="st">&quot;value&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">equal_or_not =</span> <span class="kw">map2</span>(table_round1,table_round2,<span class="op">~</span><span class="kw">setequal</span>(.x,.y)[[<span class="dv">1</span>]])) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(value,equal_or_not) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">unnest</span>()
+}</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">equal_or_not</span>(<span class="st">&quot;round1&quot;</span>,<span class="st">&quot;round2&quot;</span>)</code></pre></div>
+</div>
+<div id="-closed." class="section level3">
+<h3><span class="header-section-number">2.1.2</span> 合并数据 closed.</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">all_data &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="kw">file.path</span>(<span class="st">&quot;data&quot;</span>,<span class="st">&quot;round3_files&quot;</span>,<span class="st">&quot;all_data.csv&quot;</span>))</code></pre></div>
+</div>
+</div>
+<div id="section-2.2" class="section level2">
+<h2><span class="header-section-number">2.2</span> 交易日历</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">full_data_w_vars &lt;-<span class="st"> </span>
+<span class="kw">expand.grid</span>(<span class="dt">rank =</span> <span class="kw">unique</span>(all_data<span class="op">$</span>rank),
+            <span class="dt">code =</span> <span class="kw">unique</span>(all_data<span class="op">$</span>code)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">left_join</span>(all_data,<span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;rank&quot;</span>,<span class="st">&quot;code&quot;</span>))
+full_data &lt;-<span class="st"> </span>
+<span class="st">  </span>full_data_w_vars <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>) </code></pre></div>
+</div>
+<div id="-top-10" class="section level2">
+<h2><span class="header-section-number">2.3</span> 剔除收盘价数据缺失 top 10%</h2>
+<div id="section-2.3.1" class="section level3">
+<h3><span class="header-section-number">2.3.1</span> 10%的名单</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">miss_perf &lt;-<span class="st"> </span>
+full_data <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(code) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">n_miss =</span> <span class="kw">sum</span>(<span class="kw">is.na</span>(close))) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">write_csv</span>(<span class="kw">file.path</span>(<span class="st">&quot;data&quot;</span>,<span class="st">&quot;round3_files&quot;</span>,<span class="st">&quot;n_miss_cumsum_num_xiaosong.csv&quot;</span>))
+cutoff &lt;-<span class="st"> </span>
+<span class="st">  </span>miss_perf <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(n_miss) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">count</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">cumsum_miss =</span> <span class="kw">cumsum</span>(n)<span class="op">/</span><span class="kw">sum</span>(n)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">write_csv</span>(<span class="kw">file.path</span>(<span class="st">&quot;data&quot;</span>,<span class="st">&quot;round3_files&quot;</span>,<span class="st">&quot;n_miss_cumsum_xiaosong.csv&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(cumsum_miss <span class="op">&gt;=</span><span class="st"> </span><span class="fl">0.9</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>.[<span class="dv">1</span>,<span class="dv">1</span>] <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">pull</span>()
+mt_list &lt;-<span class="st"> </span>
+miss_perf <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(n_miss <span class="op">&lt;</span><span class="st"> </span>cutoff) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>.<span class="op">$</span>code</code></pre></div>
+<p><mark>这里只删除缺失最多前10%。</mark></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">f_list &lt;-<span class="st"> </span><span class="kw">names</span>(full_data_w_vars) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">str_subset</span>(<span class="st">&quot;f</span><span class="ch">\\</span><span class="st">d{1,2}|close&quot;</span>)</code></pre></div>
+</div>
+<div id="boxplot-outlier-detector" class="section level3">
+<h3><span class="header-section-number">2.3.2</span> boxplot outlier detector</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">remove_outliers &lt;-<span class="st"> </span><span class="cf">function</span>(x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>, ...) {
+  qnt &lt;-<span class="st"> </span><span class="kw">quantile</span>(x, <span class="dt">probs=</span><span class="kw">c</span>(.<span class="dv">25</span>, .<span class="dv">75</span>), <span class="dt">na.rm =</span> na.rm, ...)
+  H &lt;-<span class="st"> </span><span class="fl">1.5</span> <span class="op">*</span><span class="st"> </span><span class="kw">IQR</span>(x, <span class="dt">na.rm =</span> na.rm)
+  y &lt;-<span class="st"> </span>x
+  y[x <span class="op">&lt;</span><span class="st"> </span>(qnt[<span class="dv">1</span>] <span class="op">-</span><span class="st"> </span>H)] &lt;-<span class="st"> </span><span class="ot">NA</span>
+  y[x <span class="op">&gt;</span><span class="st"> </span>(qnt[<span class="dv">2</span>] <span class="op">+</span><span class="st"> </span>H)] &lt;-<span class="st"> </span><span class="ot">NA</span>
+  y
+}</code></pre></div>
+<p><code>Error: Can't create call to non-callable object</code>: + <code>funs</code><a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">stable_vars_list &lt;-<span class="st"> </span>
+full_data_w_vars <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(code) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">summarise_at</span>(f_list,sd, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">gather</span>(key,value,f_list) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(key) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">mean_sd =</span> <span class="kw">mean</span>(value)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">arrange</span>(mean_sd) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">mean_sd =</span> (<span class="kw">round</span>(mean_sd<span class="op">*</span><span class="dv">1000</span>))) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(mean_sd <span class="op">&lt;</span><span class="st"> </span><span class="dv">100</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>.<span class="op">$</span>key</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">f_list
+stable_vars_list
+unstable_vars_list &lt;-<span class="st"> </span><span class="kw">setdiff</span>(f_list,stable_vars_list)
+unstable_vars_list</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">full_data_outlier2miss &lt;-<span class="st"> </span>
+<span class="st">  </span>full_data_w_vars <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="co"># 异常值变成NA</span>
+<span class="st">    </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">group_by</span>(code) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="co"># Inf值直接作为NA</span>
+<span class="st">    </span><span class="kw">mutate_at</span>(f_list,<span class="cf">function</span>(x){<span class="kw">ifelse</span>(<span class="kw">is.infinite</span>(x),<span class="ot">NA</span>,x)}) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">mutate_at</span>(unstable_vars_list,remove_outliers)
+full_data_outlier2miss <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(code) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarise_all</span>(<span class="kw">funs</span>(<span class="kw">sum</span>(<span class="kw">is.na</span>(.)))) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">write_csv</span>(<span class="kw">file.path</span>(<span class="st">&quot;data&quot;</span>,<span class="st">&quot;round3_files&quot;</span>,<span class="st">&quot;all_miss_perf.csv&quot;</span>))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">full_data_ipt_miss &lt;-<span class="st"> </span>
+<span class="st">  </span>full_data_outlier2miss <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(code <span class="op">%in%</span><span class="st"> </span>mt_list) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="co"># 缺失值查看</span>
+<span class="st">  </span><span class="co"># summarise_all(funs(sum(is.na(.))))</span>
+<span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(code) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>tidyr<span class="op">::</span><span class="kw">fill</span>(f_list) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># 向下补</span>
+<span class="st">  </span>tidyr<span class="op">::</span><span class="kw">fill</span>(f_list, <span class="dt">.direction =</span> <span class="kw">c</span>(<span class="st">&quot;up&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># 向上补</span>
+<span class="st">  </span><span class="kw">ungroup</span>()</code></pre></div>
+<p><code>all_miss_perf.csv</code>: 异常值<span class="math inline">\(\to\)</span><code>NA</code>，<code>NA</code>的汇总情况。 下载地址: <a href="http://p24kaozv6.bkt.clouddn.com/all_miss_perf.csv" class="uri">http://p24kaozv6.bkt.clouddn.com/all_miss_perf.csv</a></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">full_data_ipt_miss <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">anyNA</span>()
+full_data_ipt_miss <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarise_each</span>(<span class="kw">funs</span>(<span class="kw">sum</span>(<span class="kw">is.infinite</span>(.)))) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">gather</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="kw">sum</span>(value))</code></pre></div>
+</div>
+</div>
+<div id="section-2.4" class="section level2">
+<h2><span class="header-section-number">2.4</span> 是否有超过涨跌停板的价格</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">upper_lower_10pctg &lt;-<span class="st"> </span><span class="cf">function</span>(x){
+  x <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(rank,code,close) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(code) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">daily_return =</span> <span class="kw">log</span>(close),
+         <span class="dt">daily_return =</span> <span class="kw">c</span>(<span class="ot">NA</span>,<span class="kw">diff</span>(daily_return))) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(daily_return)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">max =</span> <span class="kw">max</span>(daily_return),
+            <span class="dt">min =</span> <span class="kw">min</span>(daily_return),
+            <span class="dt">avg =</span> <span class="kw">mean</span>(daily_return),
+            <span class="dt">outlier =</span> <span class="kw">sum</span>(daily_return<span class="op">&gt;</span>.<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>daily_return<span class="op">&lt;</span><span class="st"> </span><span class="op">-</span><span class="fl">0.1</span>)<span class="op">/</span><span class="kw">nrow</span>(full_data_ipt_miss_outlier)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate_all</span>(<span class="dt">.funs =</span> percent)
+}</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">upper_lower_10pctg</span>(full_data_ipt_miss)</code></pre></div>
+<ul>
+<li><code>max</code>: 所有股票日收益率最大值</li>
+<li><code>min</code>: 所有股票日收益率最小值</li>
+<li><code>avg</code>: 所有股票日收益率平均值</li>
+<li><code>outlier</code>: 所有股票日收益率大于10%或者小于10%占总样本的比例</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">upper_lower_10pctg</span>(full_data_ipt_miss_outlier)</code></pre></div>
+<p>__超过涨跌停板的价格__的修正还有点复杂，因为我发现修改好，异常值率还增加了。 这个我想到的原因，但是还不好用语言表达，我明天反馈。 异常值率还是比较低的，因此你们可以照常用。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">full_data_ipt_miss_outlier &lt;-<span class="st"> </span>
+full_data_ipt_miss <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(code) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">close_upper =</span> <span class="fl">1.1</span><span class="op">*</span><span class="kw">lag</span>(close),
+         <span class="dt">close_lower =</span> <span class="fl">0.9</span><span class="op">*</span><span class="kw">lag</span>(close)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">close =</span> 
+           <span class="kw">case_when</span>(
+             close <span class="op">&lt;=</span><span class="st"> </span>close_upper <span class="op">&amp;</span><span class="st"> </span>close <span class="op">&gt;=</span><span class="st"> </span>close_lower <span class="op">~</span><span class="st"> </span>close,
+             close <span class="op">&gt;</span><span class="st"> </span>close_upper <span class="op">~</span><span class="st"> </span>close_upper,
+             close <span class="op">&lt;</span><span class="st"> </span>close_lower <span class="op">~</span><span class="st"> </span>close_lower
+           )
+           ) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>close_upper,<span class="op">-</span>close_lower)
+
+full_data_ipt_miss_outlier <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(code) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">daily_return =</span> <span class="kw">log</span>(close),
+         <span class="dt">daily_return =</span> <span class="kw">c</span>(<span class="ot">NA</span>,<span class="kw">diff</span>(daily_return))) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(daily_return<span class="op">&gt;</span>.<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>daily_return<span class="op">&lt;</span><span class="st"> </span><span class="op">-</span><span class="fl">0.1</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">upper_lower_10pctg &lt;-<span class="st"> </span><span class="cf">function</span>(x){
+  x <span class="op">%&gt;%</span>
+<span class="st">    </span><span class="kw">case_when</span>(
+      x <span class="op">&gt;</span><span class="st"> </span><span class="fl">1.1</span><span class="op">*</span><span class="kw">lag</span>(x) <span class="op">~</span><span class="st"> </span><span class="fl">1.1</span><span class="op">*</span><span class="kw">lag</span>(x),
+      x <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.9</span><span class="op">*</span><span class="kw">lag</span>(x) <span class="op">~</span><span class="st"> </span><span class="fl">0.9</span><span class="op">*</span><span class="kw">lag</span>(x),
+      x <span class="op">&gt;</span><span class="st"> </span><span class="fl">1.1</span><span class="op">*</span><span class="kw">lag</span>(x) <span class="op">&amp;</span><span class="st"> </span>x <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.9</span><span class="op">*</span><span class="kw">lag</span>(x) <span class="op">~</span><span class="st"> </span>x
+    )
+    }
+upper_lower_10pctg &lt;-<span class="st"> </span><span class="cf">function</span>(x){
+  <span class="kw">ifelse</span>(x <span class="op">&gt;</span><span class="st"> </span><span class="fl">1.1</span><span class="op">*</span>dplyr<span class="op">::</span><span class="kw">lag</span>(x),<span class="dv">10</span>,<span class="dv">5</span>)
+    }</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyquant)
+full_data_ipt_miss <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">rank =</span> <span class="kw">as.Date</span>(rank)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">as_tbl_time</span>(<span class="dt">index =</span> rank) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(code <span class="op">%in%</span><span class="st"> </span>full_data_ipt_miss<span class="op">$</span>code[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>]) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># 用小样本进行检验</span>
+<span class="st">  </span><span class="kw">select</span>(rank,code,close) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">rank =</span> <span class="kw">as.Date</span>(rank)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(code) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">tq_mutate</span>(
+    <span class="dt">select =</span> close,
+    <span class="dt">mutate_fun =</span> rollapply,
+    <span class="dt">width =</span> <span class="dv">2</span>, 
+    <span class="dt">by.column =</span> <span class="ot">FALSE</span>,
+    <span class="dt">FUN =</span> upper_lower_10pctg
+  ) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">head</span>()</code></pre></div>
+<p>tq_mutate rollapply user define function</p>
+</div>
+<div id="section-2.5" class="section level2">
+<h2><span class="header-section-number">2.5</span> 插入半年收益率</h2>
+<div id="section-2.5.1" class="section level3">
+<h3><span class="header-section-number">2.5.1</span> 逻辑</h3>
+<p><span class="math display">\[\begin{alignat}{2}
+y_t &amp;= F_t \cdot \beta + \mu_t \\
+y_{t-135} &amp;= F_{t-135} \cdot \beta + \mu_{t-135} \\
+\Delta y &amp;= \Delta 
+F_{t-135} \cdot \beta + \Delta \mu_{t-135} \\
+\end{alignat}\]</span></p>
+<p>类似于CAPM</p>
+<p><span class="math inline">\(r = r_f + \beta_0 (r_{大盘}-r_f) + \mu\)</span></p>
+</div>
+<div id="t" class="section level3">
+<h3><span class="header-section-number">2.5.2</span> <span class="math inline">\(t\)</span>的取值范围</h3>
+<p>我们先定义什么是半年收益率。 假设股价是<span class="math inline">\(P_t\)</span>，衡量<span class="math inline">\(t\)</span>时刻，某股票价格为<span class="math inline">\(P_t\)</span>。 那么它半年后的股价为<span class="math inline">\(P_{t+ 135}\)</span>。 那么在<span class="math inline">\(t \in [t,t+135]\)</span>时间内的，收益率为<span class="math inline">\(r_t=\frac{P_{t+135}-P_t}{P_t}\)</span>。 这个<span class="math inline">\(r_t\)</span>衡量了在<span class="math inline">\(t\)</span>时刻，以<span class="math inline">\(P_t\)</span>价格买入股票，在<span class="math inline">\(t+135\)</span>时刻卖出股票，的收益率。</p>
+<p>我们知道<span class="math inline">\(t \in [1,488]\)</span>，但是同样<span class="math inline">\(t+135 \in [1,488]\)</span>。 因此<span class="math inline">\(t \in [1,353]\)</span>。 也就是说，我们计算收益率时，</p>
+<ul>
+<li>买入价<span class="math inline">\(P_t\)</span>，必须满足<span class="math inline">\(t \in [1,353]\)</span>，同时</li>
+<li>卖出价<span class="math inline">\(P_{t+135}\)</span>，必须满足<span class="math inline">\(t \in [1,353]\)</span>，即<span class="math inline">\(t+135 \in [136,488]\)</span>。</li>
+</ul>
+<p>综上我们保留<span class="math inline">\(t \in [1,353]\)</span>的数据。</p>
+<p>但是 <span class="math inline">\(P_t\)</span>我们使用了<span class="math inline">\(t \in [1,353]\)</span>的价格， <span class="math inline">\(P_t\)</span>我们使用了<span class="math inline">\(t \in [136,488]\)</span>的价格。 因此我们没有少用信息。</p>
+</div>
+<div id="-head" class="section level3">
+<h3><span class="header-section-number">2.5.3</span> 选择 head</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">test_y &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">20</span>)
+test_y
+test_y <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">lag</span>(<span class="dv">5</span>)
+test_y <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">lead</span>(<span class="dv">5</span>)</code></pre></div>
+</div>
+<div id="delta" class="section level3">
+<h3><span class="header-section-number">2.5.4</span> 选择需要处理<span class="math inline">\(\Delta\)</span>的因子</h3>
+</div>
+<div id="section-2.5.5" class="section level3">
+<h3><span class="header-section-number">2.5.5</span> 计算</h3>
+<div id="rfracp_t1-p_tp_t" class="section level4">
+<h4><span class="header-section-number">2.5.5.1</span> <span class="math inline">\(r=\frac{P_{t+1}-P_t}{P_t}\)</span></h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">full_data_ipt_miss_add_return &lt;-<span class="st"> </span>
+full_data_ipt_miss <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="co"># 查看缺失值的情况</span>
+<span class="st">      </span><span class="co"># filter(code == &quot;stock100052&quot;) %&gt;%</span>
+<span class="st">      </span><span class="co"># select(rank,code,f58) %&gt;% </span>
+<span class="st">      </span><span class="co"># anyNA()</span>
+<span class="st">  </span><span class="kw">group_by</span>(code) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate_at</span>(<span class="kw">vars</span>(unstable_vars_list),
+            <span class="cf">function</span>(x){x =<span class="st"> </span>(<span class="kw">lead</span>(x<span class="op">+</span><span class="fl">1.001</span>,<span class="dv">135</span>)<span class="op">-</span>(x<span class="op">+</span><span class="fl">1.001</span>))<span class="op">/</span>(x<span class="op">+</span><span class="fl">1.001</span>)}) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(close)) <span class="op">%&gt;%</span><span class="st">   </span>
+<span class="st">    </span>
+<span class="st">  </span><span class="co"># 探查是否有空值</span>
+<span class="st">      </span><span class="co"># anyNA()</span>
+<span class="st">  </span><span class="co"># 探查出现在哪个变量,f58</span>
+<span class="st">      </span><span class="co"># ungroup() %&gt;% </span>
+<span class="st">      </span><span class="co"># summarise_each(funs(sum(is.na(.)))) %&gt;% </span>
+<span class="st">      </span><span class="co"># gather() %&gt;% </span>
+<span class="st">      </span><span class="co"># arrange(desc(value))</span>
+<span class="st">  </span><span class="co"># 探查出现在哪个股票,stock100052</span>
+<span class="st">      </span><span class="co"># group_by(code) %&gt;% </span>
+<span class="st">      </span><span class="co"># select(rank,code,f58) %&gt;% </span>
+<span class="st">      </span><span class="co"># summarise(sum_na = sum(is.na(f58))) %&gt;% </span>
+<span class="st">      </span><span class="co"># arrange(desc(sum_na))</span>
+<span class="st">      </span><span class="co"># 去表头探查</span>
+<span class="st">  </span><span class="co"># 探查出现在哪个rank,124</span>
+<span class="st">      </span><span class="co"># group_by(rank) %&gt;% </span>
+<span class="st">      </span><span class="co"># select(rank,code,f58) %&gt;% </span>
+<span class="st">      </span><span class="co"># summarise(sum_na = sum(is.na(f58))) %&gt;% </span>
+<span class="st">      </span><span class="co"># arrange(desc(sum_na))</span>
+<span class="st">      </span><span class="co"># 数据本身存在Inf的干扰。</span>
+<span class="st">  </span><span class="co"># Inf占比</span>
+<span class="st">      </span><span class="co"># ungroup() %&gt;%</span>
+<span class="st">      </span><span class="co"># summarise_each(funs(sum(is.infinite(.)))) %&gt;%</span>
+<span class="st">      </span><span class="co"># gather() %&gt;%</span>
+<span class="st">      </span><span class="co"># arrange(desc(value))</span>
+<span class="st">  </span><span class="kw">rename</span>(<span class="dt">return =</span> close) <span class="op">%&gt;%</span><span class="st">     </span>
+<span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(rank,code,return,<span class="kw">everything</span>())
+
+<span class="co"># Here, only close price become return.</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">full_data_ipt_miss_add_return_only &lt;-<span class="st"> </span>
+full_data_ipt_miss <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="co"># 查看缺失值的情况</span>
+<span class="st">      </span><span class="co"># filter(code == &quot;stock100052&quot;) %&gt;%</span>
+<span class="st">      </span><span class="co"># select(rank,code,f58) %&gt;% </span>
+<span class="st">      </span><span class="co"># anyNA()</span>
+<span class="st">  </span><span class="kw">group_by</span>(code) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(
+    <span class="dt">close =</span> (<span class="kw">lead</span>(close<span class="op">+</span><span class="fl">1.001</span>,<span class="dv">135</span>)<span class="op">-</span>(close<span class="op">+</span><span class="fl">1.001</span>))<span class="op">/</span>(close<span class="op">+</span><span class="fl">1.001</span>)
+      ) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(close)) <span class="op">%&gt;%</span><span class="st">   </span>
+<span class="st">    </span>
+<span class="st">  </span><span class="co"># 探查是否有空值</span>
+<span class="st">      </span><span class="co"># anyNA()</span>
+<span class="st">  </span><span class="co"># 探查出现在哪个变量,f58</span>
+<span class="st">      </span><span class="co"># ungroup() %&gt;% </span>
+<span class="st">      </span><span class="co"># summarise_each(funs(sum(is.na(.)))) %&gt;% </span>
+<span class="st">      </span><span class="co"># gather() %&gt;% </span>
+<span class="st">      </span><span class="co"># arrange(desc(value))</span>
+<span class="st">  </span><span class="co"># 探查出现在哪个股票,stock100052</span>
+<span class="st">      </span><span class="co"># group_by(code) %&gt;% </span>
+<span class="st">      </span><span class="co"># select(rank,code,f58) %&gt;% </span>
+<span class="st">      </span><span class="co"># summarise(sum_na = sum(is.na(f58))) %&gt;% </span>
+<span class="st">      </span><span class="co"># arrange(desc(sum_na))</span>
+<span class="st">      </span><span class="co"># 去表头探查</span>
+<span class="st">  </span><span class="co"># 探查出现在哪个rank,124</span>
+<span class="st">      </span><span class="co"># group_by(rank) %&gt;% </span>
+<span class="st">      </span><span class="co"># select(rank,code,f58) %&gt;% </span>
+<span class="st">      </span><span class="co"># summarise(sum_na = sum(is.na(f58))) %&gt;% </span>
+<span class="st">      </span><span class="co"># arrange(desc(sum_na))</span>
+<span class="st">      </span><span class="co"># 数据本身存在Inf的干扰。</span>
+<span class="st">  </span><span class="co"># Inf占比</span>
+<span class="st">      </span><span class="co"># ungroup() %&gt;%</span>
+<span class="st">      </span><span class="co"># summarise_each(funs(sum(is.infinite(.)))) %&gt;%</span>
+<span class="st">      </span><span class="co"># gather() %&gt;%</span>
+<span class="st">      </span><span class="co"># arrange(desc(value))</span>
+<span class="st">  </span><span class="kw">rename</span>(<span class="dt">return =</span> close) <span class="op">%&gt;%</span><span class="st">     </span>
+<span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(rank,code,return,<span class="kw">everything</span>())</code></pre></div>
+</div>
+<div id="doing.rlogfracp_t1p_t" class="section level4">
+<h4><span class="header-section-number">2.5.5.2</span> doing.<span class="math inline">\(r=\log(\frac{P_{t+1}}{P_t})\)</span></h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">log_return &lt;-<span class="st"> </span><span class="cf">function</span>(x){x =<span class="st"> </span><span class="kw">log</span>((<span class="kw">lead</span>(x<span class="op">+</span><span class="fl">1.001</span>,<span class="dv">135</span>))<span class="op">/</span>(x<span class="op">+</span><span class="fl">1.001</span>))}</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">full_data_ipt_miss_add_return_log &lt;-<span class="st"> </span>
+full_data_ipt_miss <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="co"># 查看缺失值的情况</span>
+<span class="st">      </span><span class="co"># filter(code == &quot;stock100052&quot;) %&gt;%</span>
+<span class="st">      </span><span class="co"># select(rank,code,f58) %&gt;% </span>
+<span class="st">      </span><span class="co"># anyNA()</span>
+<span class="st">  </span><span class="kw">group_by</span>(code) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate_at</span>(<span class="kw">vars</span>(unstable_vars_list),log_return) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(close),<span class="op">!</span><span class="kw">is.nan</span>(close)) <span class="op">%&gt;%</span><span class="st">   </span>
+<span class="st">    </span>
+<span class="st">  </span><span class="co"># 探查是否有空值</span>
+<span class="st">      </span><span class="co"># anyNA()</span>
+<span class="st">  </span><span class="co"># 探查出现在哪个变量,f58</span>
+<span class="st">      </span><span class="co"># ungroup() %&gt;% </span>
+<span class="st">      </span><span class="co"># summarise_each(funs(sum(is.na(.)))) %&gt;% </span>
+<span class="st">      </span><span class="co"># gather() %&gt;% </span>
+<span class="st">      </span><span class="co"># arrange(desc(value))</span>
+<span class="st">  </span><span class="co"># 探查出现在哪个股票,stock100052</span>
+<span class="st">      </span><span class="co"># group_by(code) %&gt;% </span>
+<span class="st">      </span><span class="co"># select(rank,code,f58) %&gt;% </span>
+<span class="st">      </span><span class="co"># summarise(sum_na = sum(is.na(f58))) %&gt;% </span>
+<span class="st">      </span><span class="co"># arrange(desc(sum_na))</span>
+<span class="st">      </span><span class="co"># 去表头探查</span>
+<span class="st">  </span><span class="co"># 探查出现在哪个rank,124</span>
+<span class="st">      </span><span class="co"># group_by(rank) %&gt;% </span>
+<span class="st">      </span><span class="co"># select(rank,code,f58) %&gt;% </span>
+<span class="st">      </span><span class="co"># summarise(sum_na = sum(is.na(f58))) %&gt;% </span>
+<span class="st">      </span><span class="co"># arrange(desc(sum_na))</span>
+<span class="st">      </span><span class="co"># 数据本身存在Inf的干扰。</span>
+<span class="st">  </span><span class="co"># Inf占比</span>
+<span class="st">      </span><span class="co"># ungroup() %&gt;%</span>
+<span class="st">      </span><span class="co"># summarise_each(funs(sum(is.infinite(.)))) %&gt;%</span>
+<span class="st">      </span><span class="co"># gather() %&gt;%</span>
+<span class="st">      </span><span class="co"># arrange(desc(value))</span>
+<span class="st">  </span><span class="kw">rename</span>(<span class="dt">return =</span> close) <span class="op">%&gt;%</span><span class="st">     </span>
+<span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(rank,code,return,<span class="kw">everything</span>())</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Here, only close price become return.</span>
+
+full_data_ipt_miss_add_return_log_only &lt;-<span class="st"> </span>
+full_data_ipt_miss <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="co"># 查看缺失值的情况</span>
+<span class="st">      </span><span class="co"># filter(code == &quot;stock100052&quot;) %&gt;%</span>
+<span class="st">      </span><span class="co"># select(rank,code,f58) %&gt;% </span>
+<span class="st">      </span><span class="co"># anyNA()</span>
+<span class="st">  </span><span class="kw">group_by</span>(code) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(
+    <span class="dt">close =</span> <span class="kw">log_return</span>(close)
+      ) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(close))<span class="er">)</span> <span class="op">%&gt;%</span><span class="st">   </span>
+<span class="st">    </span>
+<span class="st">  </span><span class="co"># 探查是否有空值</span>
+<span class="st">      </span><span class="co"># anyNA()</span>
+<span class="st">  </span><span class="co"># 探查出现在哪个变量,f58</span>
+<span class="st">      </span><span class="co"># ungroup() %&gt;% </span>
+<span class="st">      </span><span class="co"># summarise_each(funs(sum(is.na(.)))) %&gt;% </span>
+<span class="st">      </span><span class="co"># gather() %&gt;% </span>
+<span class="st">      </span><span class="co"># arrange(desc(value))</span>
+<span class="st">  </span><span class="co"># 探查出现在哪个股票,stock100052</span>
+<span class="st">      </span><span class="co"># group_by(code) %&gt;% </span>
+<span class="st">      </span><span class="co"># select(rank,code,f58) %&gt;% </span>
+<span class="st">      </span><span class="co"># summarise(sum_na = sum(is.na(f58))) %&gt;% </span>
+<span class="st">      </span><span class="co"># arrange(desc(sum_na))</span>
+<span class="st">      </span><span class="co"># 去表头探查</span>
+<span class="st">  </span><span class="co"># 探查出现在哪个rank,124</span>
+<span class="st">      </span><span class="co"># group_by(rank) %&gt;% </span>
+<span class="st">      </span><span class="co"># select(rank,code,f58) %&gt;% </span>
+<span class="st">      </span><span class="co"># summarise(sum_na = sum(is.na(f58))) %&gt;% </span>
+<span class="st">      </span><span class="co"># arrange(desc(sum_na))</span>
+<span class="st">      </span><span class="co"># 数据本身存在Inf的干扰。</span>
+<span class="st">  </span><span class="co"># Inf占比</span>
+<span class="st">      </span><span class="co"># ungroup() %&gt;%</span>
+<span class="st">      </span><span class="co"># summarise_each(funs(sum(is.infinite(.)))) %&gt;%</span>
+<span class="st">      </span><span class="co"># gather() %&gt;%</span>
+<span class="st">      </span><span class="co"># arrange(desc(value))</span>
+<span class="st">  </span><span class="kw">rename</span>(<span class="dt">return =</span> close) <span class="op">%&gt;%</span><span class="st">     </span>
+<span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(rank,code,return,<span class="kw">everything</span>())</code></pre></div>
+</div>
+<div id="section-2.5.5.3" class="section level4">
+<h4><span class="header-section-number">2.5.5.3</span> 缺失值再检查</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">any_miss_infinite &lt;-<span class="st"> </span><span class="cf">function</span>(x){
+x1 &lt;-<span class="st"> </span>x <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">anyNA</span>()
+x2 &lt;-<span class="st"> </span>x <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarise_each</span>(<span class="kw">funs</span>(<span class="kw">sum</span>(<span class="kw">is.infinite</span>(.)))) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">gather</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="kw">sum</span>(value)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">pull</span>()
+<span class="kw">return</span>(<span class="kw">c</span>(x1,x2))
+}</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">any_miss_infinite</span>(full_data_ipt_miss_add_return)
+<span class="kw">any_miss_infinite</span>(full_data_ipt_miss_add_return_only)
+<span class="co"># any_miss_infinite(full_data_ipt_miss_add_return_log)</span>
+<span class="co"># any_miss_infinite(full_data_ipt_miss_add_return_log_only)</span></code></pre></div>
+<p><code>unstable_vars_list</code>有一部分变量出现<code>0</code>的情况，因此在计算<span class="math inline">\(\delta\)</span>时，会出现<span class="math inline">\(\frac{x_t-x_{t-135}}{0}\)</span>的情况，因此对这些变量加1<span class="math inline">\(x \to x+1\)</span>。 但是<span class="math inline">\(x=-1\)</span>时还是会出现这个问题。 探查数据后，发现都是保留两位小数，<mark>因此加<span class="math inline">\(1.001\)</span>稳了</mark>。 数据中存在<span class="math inline">\(Inf\)</span>的情况，因此计算<span class="math inline">\(\Delta\)</span>时，会出现<code>Inf/Inf</code>无解的情况，直接<code>fill</code>掉。</p>
+</div>
+</div>
+</div>
+<div id="section-2.6" class="section level2">
+<h2><span class="header-section-number">2.6</span> 风险分层</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">full_data_ipt_miss_mu_sigma &lt;-<span class="st"> </span>
+<span class="st">  </span>full_data_ipt_miss_add_return <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(code) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">mu =</span> <span class="kw">mean</span>(return),<span class="dt">sigma =</span> <span class="kw">sd</span>(return)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">tvalue =</span> mu<span class="op">/</span>sigma) 
+full_data_ipt_miss_mu_sigma_rank_by_<span class="dv">3</span> &lt;-<span class="st"> </span>
+full_data_ipt_miss_mu_sigma <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">group =</span> <span class="kw">cut_number</span>(<span class="kw">abs</span>(tvalue),<span class="dv">3</span>),
+         <span class="dt">group =</span> <span class="kw">as.integer</span>(group))
+full_data_ipt_miss_mu_sigma_rank_by_<span class="dv">3</span> <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(group) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">count</span>()</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">full_data_ipt_miss_mu_sigma_rank_by_<span class="dv">3</span> <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(code,group) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">write_csv</span>(<span class="kw">file.path</span>(<span class="st">&quot;data&quot;</span>,<span class="st">&quot;round3_files&quot;</span>,<span class="st">&quot;full_data_ipt_miss_mu_sigma_rank_by_3.csv&quot;</span>))  </code></pre></div>
+</div>
+<div id="section-2.7" class="section level2">
+<h2><span class="header-section-number">2.7</span> 标准化</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dim</span>(full_data_ipt_miss_add_return)
+pryr<span class="op">::</span><span class="kw">object_size</span>(full_data_ipt_miss_add_return)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">part1_index &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="kw">round</span>(<span class="kw">nrow</span>(full_data_ipt_miss_add_return)<span class="op">/</span><span class="dv">2</span>)
+part2_index &lt;-<span class="st"> </span><span class="kw">setdiff</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(full_data_ipt_miss_add_return),part1_index)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(pryr)
+<span class="kw">object_size</span>(full_data_ipt_miss_add_return)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">full_data_ipt_miss_add_return <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">write_csv</span>(<span class="kw">file.path</span>(<span class="st">&quot;data&quot;</span>,<span class="st">&quot;round3_files&quot;</span>,<span class="st">&quot;full_data_ipt_miss_wo_scale.csv&quot;</span>))  
+<span class="co"># full_data_ipt_miss_add_return[part2_index,] %&gt;% </span>
+  <span class="co"># write_csv(file.path(&quot;data&quot;,&quot;round3_files&quot;,&quot;full_data_ipt_miss_wo_scale_part2.csv&quot;))  </span></code></pre></div>
+<p><code>full_data_ipt_miss_wo_scale.csv</code>未标准化数据。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">full_data_ipt_miss_add_return <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">anyNA</span>()</code></pre></div>
+</div>
+<div id="pca" class="section level2">
+<h2><span class="header-section-number">2.8</span> PCA构建大盘指数</h2>
+<div id="section-2.8.1" class="section level3">
+<h3><span class="header-section-number">2.8.1</span> 要求</h3>
+<p><del>我们有840个股票，我随机分为三类，每个有280个股票，每个做一个PCA，选择<code>comp1</code>作为大盘指数，因此我们get 三个大盘指数。</del></p>
+<p><del>为什么要均分三类呢？</del> <del>这是PCA的算法局限，我们有353期数据，PCA要求被聚的股票数量不能超过353，因此<span class="math inline">\(\frac{840}{2}=420 &gt; 353\)</span>、<span class="math inline">\(\frac{840}{3} = 280 &lt; 353\)</span>。</del> <del>因此分三类才能满足要求。</del> <del>并且，基本是三因子模型，只要有三个指数，怎么样都是run显著的。</del></p>
+</div>
+<div id="section-2.8.2" class="section level3">
+<h3><span class="header-section-number">2.8.2</span> 详细内容</h3>
+<p>我们做一个大盘指数，但是我们不知道确定每个股票在大盘中的权重，我们给予一个假设，越重要的权重越高，那么在无监督的情况下，这和PCA的思路非常类似，其他的还有NMF、t-SNE等，抛砖引玉，先搞PCA。 这里主要参考 <span class="citation">Conway and White (2012)</span> 和 <span class="citation">Hilpisch (2014)</span> 的思路。</p>
+<p>因此当只有一个<span class="math inline">\(x\)</span>时，SUR理论上肯定可以跑起来了，就用R。</p>
+<blockquote>
+<p>One place where this type of dimensionality reduction is particularly helpful is when dealing with stock market data. <span class="citation">(Conway and White 2012)</span></p>
+</blockquote>
+<p>实际上构建大盘指数的思路就是做降维。</p>
+<blockquote>
+<p>The first new column, will often contain the vast majority of the structure in the entire data set. PCA is particularly effective when the columns in our data set are all strongly correlated. <span class="citation">(Conway and White 2012)</span></p>
+</blockquote>
+<p>这个大盘指数肯定是描述了我们获得股票数据的最重要的结构。 并且PCA对于处理关联性很高的数据是非常有用的，比如股票，同行业同涨同跌。</p>
+<p>注意这里使用是股票的价格进行合成而非收益率。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">rank_n &lt;-<span class="st"> </span><span class="kw">unique</span>(full_data_ipt_miss<span class="op">$</span>rank) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">length</span>()
+rank_n
+code_n &lt;-<span class="st"> </span><span class="kw">unique</span>(full_data_ipt_miss<span class="op">$</span>code) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">length</span>()
+code_n</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pca_matrix &lt;-<span class="st"> </span>
+<span class="st">  </span>full_data_ipt_miss <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(rank,code,close) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">spread</span>(code,close)</code></pre></div>
+<p><code>Error in princomp.default(pca_matrix[-1]) : 'princomp' can only be used with more units than variables</code></p>
+<p><code>Error in princomp.default(pca_matrix[-1]) : 'princomp' can only be used with more units than variables</code> 意思是说，样本小于变量数量的时候，不能使用<code>princomp</code>，而要使用 <code>prcomp</code>。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pca_model_all &lt;-<span class="st"> </span><span class="kw">prcomp</span>(pca_matrix,<span class="dt">center =</span> <span class="ot">TRUE</span>,<span class="dt">scale. =</span> <span class="ot">TRUE</span>)
+pca_index_table &lt;-<span class="st"> </span><span class="kw">predict</span>(pca_model_all) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as_tibble</span>()</code></pre></div>
+<blockquote>
+<p>In this summary, the standard deviations tell us how much of the variance in the data set is accounted for by the different principal components. <span class="citation">(Conway and White 2012)</span></p>
+</blockquote>
+<p>如果查看<code>pca_model_1</code>会看到每个comp对数据结构的方差的解释，这里我就不列举了，大家可以尝试下。 <code>PC1</code>的标准差比较大，这里需要进行标准化处理<span class="citation">(Conway and White 2012)</span>。 <code>PC1</code>存在负数，不符合股价的假设，无法计算收益率，这里做平移转换。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pca_index_table_add_return &lt;-<span class="st"> </span>
+pca_index_table <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(PC1) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">PC1 =</span> <span class="kw">scale</span>(PC1)<span class="op">+</span><span class="dv">3</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="co"># summarise(</span>
+<span class="st">  </span><span class="co">#   sum(is.na(PC1)),</span>
+<span class="st">  </span><span class="co">#   max(PC1),</span>
+<span class="st">  </span><span class="co">#   min(PC1),</span>
+<span class="st">  </span><span class="co">#   sum(PC1==-1.001)</span>
+<span class="st">  </span><span class="co">#   ) %&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">PC1_return =</span> <span class="kw">log</span>((<span class="kw">lead</span>(PC1,<span class="dv">135</span>))<span class="op">/</span>(PC1))) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(PC1_return),<span class="op">!</span><span class="kw">is.nan</span>(PC1_return))</code></pre></div>
+<ul>
+<li><code>PC1</code>是大盘指数</li>
+<li><code>PC1_return</code>是大盘指数半年收益率</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pca_index_table_add_return <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">write_csv</span>(<span class="kw">file.path</span>(<span class="st">&quot;data&quot;</span>,<span class="st">&quot;round3_files&quot;</span>,<span class="st">&quot;pca_index_table.csv&quot;</span>))</code></pre></div>
+<p>因此PCA得到不同股票的权重，非常优秀。 你们可以left_join<code>PC1_return</code>使用。</p>
+</div>
+<div id="capmalpha" class="section level3">
+<h3><span class="header-section-number">2.8.3</span> CAPM找<span class="math inline">\(\alpha\)</span></h3>
+<div id="naive-alpha" class="section level4">
+<h4><span class="header-section-number">2.8.3.1</span> naive <span class="math inline">\(\alpha\)</span></h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">alpha_xiaosong_<span class="dv">20180419</span> &lt;-
+<span class="st">  </span><span class="kw">read_csv</span>(<span class="kw">file.path</span>(<span class="st">&quot;data&quot;</span>,<span class="st">&quot;round3_files&quot;</span>,<span class="st">&quot;alpha_xiaosong_20180419.csv&quot;</span>))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">alpha_xiaosong_20180419_sum &lt;-<span class="st"> </span>
+<span class="st">  </span>alpha_xiaosong_<span class="dv">20180419</span> <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(code_name) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarise</span>(
+    <span class="dt">r2 =</span> <span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw">sum</span>((y_real<span class="op">-</span>y_hat)<span class="op">^</span><span class="dv">2</span>)<span class="op">/</span><span class="kw">sum</span>((y_real<span class="op">-</span><span class="kw">mean</span>(y_real))<span class="op">^</span><span class="dv">2</span>),
+    <span class="dt">alpha =</span> <span class="kw">mean</span>(alpha),
+    <span class="dt">y_real_sd =</span> <span class="kw">sd</span>(y_real),
+    <span class="dt">y_hat_sd =</span> <span class="kw">sd</span>(y_hat)
+  ) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate_if</span>(is.double,percent) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">target =</span> alpha<span class="op">/</span>(y_real_sd<span class="op">+</span>y_hat_sd<span class="op">*</span>r2)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(target))
+alpha_xiaosong_20180419_sum <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">head</span>(<span class="dv">50</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">write_csv</span>(<span class="kw">file.path</span>(<span class="st">&quot;data&quot;</span>,<span class="st">&quot;round3_files&quot;</span>,<span class="st">&quot;alpha_xiaosong_output_20180419.csv&quot;</span>))
+alpha_xiaosong_20180419_sum <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(alpha)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">head</span>(<span class="dv">50</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">write_csv</span>(<span class="kw">file.path</span>(<span class="st">&quot;data&quot;</span>,<span class="st">&quot;round3_files&quot;</span>,<span class="st">&quot;alpha_xiaosong_output_20180419_02.csv&quot;</span>))
+alpha_xiaosong_20180419_sum <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(alpha,target) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">gather</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> value,<span class="dt">col=</span>key)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_freqpoly</span>()</code></pre></div>
+<p>满足正态分布。</p>
+<p><span class="math display">\[\begin{alignat}{2}
+\text{target: }t &amp;= \frac{\mu}{\sigma}\\
+&amp;=\frac{\alpha}{\sigma_y + \sigma_{\hat y} \cdot R^2}
+\end{alignat}\]</span></p>
+</div>
+<div id="sharpe-ratio" class="section level4">
+<h4><span class="header-section-number">2.8.3.2</span> 类Sharpe Ratio</h4>
+<p>这里主要是使用<code>replicate</code>函数，随机配股票组合，选出最优的类Sharpe Ratio。 假设我只想选出的组合有<span class="math inline">\(n \in [20,50]\)</span>个股票。我随机模拟了1000种，相当于我从800多种股票中不放回抽样抽出<span class="math inline">\(n\)</span>个股票，重复1000次。然后我计算类Sharpe Ratio。</p>
+<p><span class="math display">\[SR = \frac{\sum_{i=1}^n \alpha_i}{| {\sum_{i=1}^n \beta_i}|}\]</span></p>
+<p>这里的 <span class="math inline">\(\alpha\)</span>衡量超额收益， <span class="math inline">\(\beta\)</span>衡量和大盘指数相关性，理论上完全中和最好，即<span class="math inline">\({\sum_{i=1}^n \beta_i} \to 0\)</span>，表示额外风险为0。</p>
+<p><span class="math display">\[SR = \frac{\alpha}{\beta} = (\alpha)^1(\frac{1}{\beta})^1\]</span></p>
+<p>我在这里把<span class="math inline">\(\alpha\)</span>和<span class="math inline">\(\beta\)</span>的Power设计成<span class="math inline">\(1:1\)</span>，似乎不太合理，有待商榷，但是方向上，就是为了权衡考虑<span class="math inline">\(\alpha\)</span>和<span class="math inline">\(\beta\)</span>。 最后找出1000中最好的<span class="math inline">\(SR^*\)</span>。</p>
+<p>回归我们问题的本身，<span class="math inline">\(n \in [20,50]\)</span>，因此有<span class="math inline">\(50-20+1 = 31\)</span>种情况，每种情况对应一个<span class="math inline">\(SR^*\)</span>，最后在其中再选出最好的<span class="math inline">\(SR^{**}\)</span>。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">alpha_beta_xiaosong_001_353_<span class="dv">20180420</span> &lt;-
+<span class="st">  </span><span class="kw">read_csv</span>(<span class="kw">file.path</span>(<span class="st">&quot;data&quot;</span>,<span class="st">&quot;round3_files&quot;</span>,<span class="st">&quot;alpha_beta_xiaosong_001_353_20180420.csv&quot;</span>))
+alpha_beta_xiaosong_343_353_<span class="dv">20180420</span> &lt;-
+<span class="st">  </span><span class="kw">read_csv</span>(<span class="kw">file.path</span>(<span class="st">&quot;data&quot;</span>,<span class="st">&quot;round3_files&quot;</span>,<span class="st">&quot;alpha_beta_xiaosong_343_353_20180420.csv&quot;</span>))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">alpha_beta_xiaosong_343_353_20180420_sum &lt;-<span class="st"> </span>
+alpha_beta_xiaosong_343_353_<span class="dv">20180420</span> <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">distinct</span>(code_name,alpha,beta) 
+  <span class="co"># group_by(code_name) %&gt;% </span>
+  <span class="co"># count() %&gt;% </span>
+  <span class="co"># filter(n&gt;1)</span>
+
+best_target &lt;-<span class="st"> </span><span class="cf">function</span>(data,n){
+<span class="kw">set.seed</span>(<span class="dv">456</span>)
+alpha_beta_xiaosong_343_353_20180420_sum_resample &lt;-<span class="st"> </span>
+<span class="kw">replicate</span>(<span class="dv">1000</span>,
+          <span class="kw">sample_n</span>(data,n)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">t</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">as.data.frame</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">add_column</span>(<span class="dt">index =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">1000</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">unnest</span>()
+alpha_beta_xiaosong_343_353_20180420_sum_resample_output &lt;-<span class="st"> </span>
+<span class="st">  </span>alpha_beta_xiaosong_343_353_20180420_sum_resample <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(index) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">alpha =</span> <span class="kw">mean</span>(alpha), <span class="dt">beta =</span> <span class="kw">mean</span>(beta),
+            <span class="dt">target =</span> alpha<span class="op">/</span><span class="kw">abs</span>(beta)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(target))
+alpha_beta_xiaosong_343_353_20180420_sum_resample_output <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">head</span>(<span class="dv">1</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(index) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">left_join</span>(
+    alpha_beta_xiaosong_343_353_20180420_sum_resample,
+    <span class="dt">by =</span> <span class="st">&quot;index&quot;</span>
+  )
+}</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">alpha_beta_xiaosong_343_353_20180420_best_sample &lt;-<span class="st"> </span>
+<span class="kw">data_frame</span>(<span class="dt">best_n =</span> <span class="dv">20</span><span class="op">:</span><span class="dv">50</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">data =</span> <span class="kw">map</span>(
+    <span class="dt">.x =</span> best_n,
+    <span class="dt">.f =</span> <span class="cf">function</span>(n){<span class="kw">best_target</span>(alpha_beta_xiaosong_343_353_<span class="dv">20180420</span>,n)}
+                     ))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">alpha_beta_xiaosong_001_353_20180420_best_sample <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">target =</span> <span class="kw">map</span>(<span class="dt">.x =</span> data,
+                      <span class="dt">.f =</span> <span class="cf">function</span>(x){
+                        x <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">                          </span><span class="kw">summarise</span>(
+                            <span class="dt">alpha =</span> <span class="kw">mean</span>(alpha), 
+                            <span class="dt">beta =</span> <span class="kw">mean</span>(beta),
+                            <span class="dt">target =</span> alpha<span class="op">/</span><span class="kw">abs</span>(beta)
+                            ) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">                          </span><span class="kw">select</span>(target)
+                      })) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(best_n,target) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">unnest</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(target)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">head</span>()</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">alpha_beta_xiaosong_343_353_20180420_best_sample <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(best_n <span class="op">==</span><span class="st"> </span><span class="dv">21</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(data) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">unnest</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">write_csv</span>(
+    <span class="kw">file.path</span>(
+      <span class="st">&quot;round2_files&quot;</span>,
+      <span class="st">&quot;alpha_beta_xiaosong_343_353_20180420_best_sample.csv&quot;</span>))</code></pre></div>
+</div>
+<div id="alpha-beta-textp-value" class="section level4">
+<h4><span class="header-section-number">2.8.3.3</span> <span class="math inline">\(\alpha, \beta, \text{p value}\)</span></h4>
+<p>这里对<span class="math inline">\(y\)</span>未进行power transformation，仅仅当抛砖引玉。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(broom)
+get_alpha_beta_pvalue &lt;-<span class="st"> </span><span class="cf">function</span>(x){
+x <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(rank,code,return) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">left_join</span>(
+    pca_index_table_add_return <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">      </span><span class="kw">select</span>(PC1_return) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">      </span><span class="kw">add_column</span>(
+        <span class="dt">rank =</span> x <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">distinct</span>(rank) <span class="op">%&gt;%</span><span class="st"> </span>.<span class="op">$</span>rank
+      )
+    ,<span class="dt">by =</span> <span class="st">&quot;rank&quot;</span>
+  ) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="co"># filter(code %in% c(&quot;stock100000&quot;,&quot;stock100003&quot;)) %&gt;% </span>
+<span class="st">  </span><span class="co"># 小数据测试函数</span>
+<span class="st">  </span><span class="kw">group_by</span>(code) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">nest</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">model =</span> <span class="kw">map</span>(<span class="dt">.x =</span> data, <span class="dt">.f =</span> <span class="op">~</span><span class="st"> </span><span class="kw">lm</span>(return <span class="op">~</span><span class="st"> </span>PC1_return, <span class="dt">data =</span> .x)),
+         <span class="dt">output =</span> <span class="kw">map</span>(<span class="dt">.x =</span> model, <span class="dt">.f =</span> <span class="op">~</span><span class="st"> </span><span class="kw">tidy</span>(.))) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(code,output) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">unnest</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(code, term, estimate, p.value) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">gather</span>(metric,value,estimate<span class="op">:</span>p.value) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">unite</span>(<span class="st">&quot;type&quot;</span>,<span class="kw">c</span>(<span class="st">&quot;term&quot;</span>,<span class="st">&quot;metric&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">spread</span>(type,value) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">rename_all</span>(
+    <span class="kw">funs</span>(
+      <span class="kw">str_replace_all</span>(.,<span class="st">&quot;</span><span class="ch">\\</span><span class="st">(Intercept</span><span class="ch">\\</span><span class="st">)&quot;</span>,<span class="st">&quot;alpha&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">      </span><span class="kw">str_replace_all</span>(.,<span class="st">&quot;estimate&quot;</span>,<span class="st">&quot;value&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">      </span><span class="kw">str_replace_all</span>(.,<span class="st">&quot;PC1_return&quot;</span>,<span class="st">&quot;beta&quot;</span>)
+    )
+  )
+}</code></pre></div>
+<p><code>.f = ~ lm(return ~ PC1_return, data = .x)</code> 这里批量跑方程的方法可以多参考 <span class="citation">Wickham and Grolemund (2017 Chapter 20, pp. 402)</span>。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data_alpha_beta_pvalue &lt;-<span class="st"> </span><span class="kw">get_alpha_beta_pvalue</span>(full_data_ipt_miss_add_return)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data_alpha_beta_pvalue <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(alpha_value<span class="op">:</span>beta_p.value) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarise_all</span>(<span class="kw">funs</span>(<span class="kw">min</span>(.),<span class="kw">max</span>(.))) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">gather</span>()</code></pre></div>
+<p><span class="math inline">\(\alpha, \beta \in [-1,1.04]\)</span>不利于我们分析，我们统一平移2个单位，使得它们<span class="math inline">\(\geq 1\)</span>。 现在我们需要p value越小越好，<span class="math inline">\((1-\text{p value)}\)</span>衡量了我们对<span class="math inline">\(\alpha\)</span>和<span class="math inline">\(\beta\)</span>的信任程度， 我们对<span class="math inline">\(alpha\)</span>和<span class="math inline">\(\beta\)</span>进行如下修改，参考Cobb-Douglas函数 <span class="citation">(Nicholson and Snyder 2011)</span>。</p>
+<p><span class="math display">\[\alpha^* = \alpha^{1-\text{p value}}\]</span> <span class="math display">\[\beta^* = \beta^{1-\text{p value}}\]</span></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data_alpha_beta_pvalue_edited &lt;-<span class="st"> </span>
+data_alpha_beta_pvalue <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(
+    <span class="dt">alpha =</span> <span class="kw">map2_dbl</span>(<span class="dt">.x =</span> alpha_value,<span class="dt">.y =</span> alpha_p.value,<span class="dt">.f =</span> <span class="op">~</span><span class="st"> </span>(.x<span class="op">+</span><span class="dv">2</span>)<span class="op">^</span>(<span class="dv">1</span><span class="op">-</span>.y)),
+    <span class="dt">beta =</span>  <span class="kw">map2_dbl</span>(<span class="dt">.x =</span> beta_value, <span class="dt">.y =</span> beta_p.value, <span class="dt">.f =</span> <span class="op">~</span><span class="st"> </span>(.x<span class="op">+</span><span class="dv">2</span>)<span class="op">^</span>(<span class="dv">1</span><span class="op">-</span>.y))
+  ) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="co"># summarise(</span>
+<span class="st">  </span><span class="co">#   sum(alpha_value &gt; 0 &amp; alpha &lt; 0),</span>
+<span class="st">  </span><span class="co">#   sum(beta_value &gt; 0 &amp; beta &lt; 0)</span>
+<span class="st">  </span><span class="co">#   # 验证符号是否有错</span>
+<span class="st">  </span><span class="co">#   )</span>
+<span class="st">  </span><span class="kw">select</span>(code,alpha,beta)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">alpha_beta_pvalue_best_sample &lt;-<span class="st"> </span>
+<span class="kw">data_frame</span>(<span class="dt">best_n =</span> <span class="dv">20</span><span class="op">:</span><span class="dv">50</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">data =</span> <span class="kw">map</span>(
+    <span class="dt">.x =</span> best_n,
+    <span class="dt">.f =</span> <span class="cf">function</span>(n){<span class="kw">best_target</span>(data_alpha_beta_pvalue_edited,n)}
+                     ))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">alpha_beta_pvalue_best_sample <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">target =</span> <span class="kw">map</span>(<span class="dt">.x =</span> data,
+                      <span class="dt">.f =</span> <span class="cf">function</span>(x){
+                        x <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">                          </span><span class="kw">summarise</span>(
+                            <span class="dt">alpha =</span> <span class="kw">mean</span>(alpha), 
+                            <span class="dt">beta =</span> <span class="kw">mean</span>(beta),
+                            <span class="dt">target =</span> alpha<span class="op">/</span><span class="kw">abs</span>(beta)
+                            ) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">                          </span><span class="kw">select</span>(target)
+                      })) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(best_n,target) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">unnest</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(target)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">head</span>()</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">alpha_beta_pvalue_best_sample <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(best_n <span class="op">==</span><span class="st"> </span><span class="dv">23</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(data) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">unnest</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">write_csv</span>(
+    <span class="kw">file.path</span>(<span class="st">&quot;data&quot;</span>,<span class="st">&quot;round3_files&quot;</span>,<span class="st">&quot;alpha_beta_pvalue_best_sample.csv&quot;</span>))</code></pre></div>
+</div>
+<div id="section-2.8.3.4" class="section level4">
+<h4><span class="header-section-number">2.8.3.4</span> 使用更加复杂的模型</h4>
+<p>替换原来的OLS为</p>
+<ul>
+<li><code>lasso</code></li>
+<li><code>biglm</code></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="index-close" class="section level2">
+<h2><span class="header-section-number">2.9</span> 增加大盘index close</h2>
+<p>逻辑太粗暴，T了。</p>
+<pre><code>full_data_ipt_miss_add_return &lt;- 
+full_data_ipt_miss_add_return %&gt;% 
+  group_by(rank) %&gt;% 
+  mutate(index = mean(return),
+         index_sq = index^2)</code></pre>
+</div>
+<div id="y" class="section level2">
+<h2><span class="header-section-number">2.10</span> y滞后项作为自变量</h2>
+<p>单规则厉害，正说明了y要做自变量。</p>
+<p>这里增加15次<code>lag</code>滞后项，逐日。 未剔除缺失值，方便大家可以选择少量<code>lag</code>滞后项，而不是武断减少1.2610^{4}个自由度。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(data.table)
+data_lag_y_<span class="dv">15</span> &lt;-<span class="st"> </span>
+full_data_ipt_miss_add_return <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">   </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">   </span><span class="kw">group_by</span>(code) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">   </span><span class="kw">do</span>(<span class="kw">data.frame</span>(., 
+                 <span class="kw">setNames</span>(
+                   <span class="kw">shift</span>(
+                     .<span class="op">$</span>return, <span class="dv">1</span><span class="op">:</span><span class="dv">15</span>), 
+                     <span class="kw">paste</span>(
+                       <span class="st">&quot;return_lag&quot;</span>,
+                       <span class="kw">seq</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">15</span>),
+                       <span class="dt">sep=</span><span class="st">&quot;_&quot;</span>)))) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(rank,code,<span class="kw">contains</span>(<span class="st">&quot;return&quot;</span>))</code></pre></div>
+<div id="tidyquantjiaxiangtidyquant" class="section level3">
+<h3><span class="header-section-number">2.10.1</span> 利用<code>tidyquant</code>，方法二<span class="citation">(Li 2018)</span>。</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyquant)
+<span class="kw">library</span>(tibbletime)
+data_lag_y_15_ver2 &lt;-<span class="st"> </span>
+full_data_ipt_miss_add_return <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(code <span class="op">%in%</span><span class="st"> </span>full_data_ipt_miss_add_return<span class="op">$</span>code[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>]) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># 用小样本进行检验</span>
+<span class="st">  </span><span class="kw">select</span>(rank,code,return) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">rank =</span> <span class="kw">as.Date</span>(<span class="st">&quot;2018-01-01&quot;</span>)<span class="op">+</span>rank) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">as_tbl_time</span>(<span class="dt">index =</span> rank) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">tq_mutate</span>(
+    <span class="dt">select =</span> return,
+    <span class="dt">mutate_fun =</span> lag.xts,
+    <span class="dt">k =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">15</span>,
+    <span class="dt">col_rename =</span> <span class="kw">paste0</span>(<span class="st">&quot;return_lag_&quot;</span>,<span class="dv">1</span><span class="op">:</span><span class="dv">15</span>)
+  ) 
+data_lag_y_15_ver2 <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>rank) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.data.frame</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">setequal</span>(
+    data_lag_y_<span class="dv">15</span> <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">      </span><span class="kw">filter</span>(code <span class="op">%in%</span><span class="st"> </span>data_lag_y_<span class="dv">15</span><span class="op">$</span>code[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>]) <span class="op">%&gt;%</span><span class="st">  </span><span class="co"># 用小样本进行检验</span>
+<span class="st">      </span><span class="kw">select</span>(<span class="op">-</span>rank) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.data.frame</span>()
+  )</code></pre></div>
+</div>
+<div id="section-2.10.2" class="section level3">
+<h3><span class="header-section-number">2.10.2</span> 检查批量成功进行</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data_lag_y_<span class="dv">15</span> <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarise_all</span>(<span class="kw">funs</span>(<span class="kw">sum</span>(<span class="kw">is.na</span>(.)))) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">head</span>(<span class="dv">10</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data_lag_y_<span class="dv">15</span> <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">write_csv</span>(<span class="kw">file.path</span>(<span class="st">&quot;data&quot;</span>,<span class="st">&quot;round3_files&quot;</span>,<span class="st">&quot;data_lag_y_15.csv&quot;</span>))</code></pre></div>
+</div>
+</div>
+<div id="x" class="section level2">
+<h2><span class="header-section-number">2.11</span> 建立x滞后项</h2>
+<p><span class="math inline">\(\Delta x\)</span>效果好，但是选<span class="math inline">\(x\)</span>。 我们的目的是任意股票在<span class="math inline">\(t=488+135\)</span>时，预测<span class="math inline">\(\hat r_{488+135}\)</span>，如果预测足够准，选择最好的20-50个<span class="math inline">\(\hat r_{488+135}\)</span>。</p>
+<p>这里<span class="math inline">\(r_{488+135} = \frac{P_{488+135}-P_{488}}{P_{488}}\)</span>，这里<span class="math inline">\(P_{488}\)</span>我们是已知的。 因此我们实际上是预测<span class="math inline">\(P_{488+135}\)</span>。</p>
+<div id="delta-x" class="section level3">
+<h3><span class="header-section-number">2.11.1</span> 使用<span class="math inline">\(\Delta x\)</span>进行预测</h3>
+<p><span class="math display">\[P_{488+135} \sim r_{488+135} \sim \Delta x\]</span></p>
+<p>这里<span class="math inline">\(x\)</span>最大取到488， 因此， <span class="math inline">\(\Delta x = \frac{x_{488}-x_{488-135}}{x_{488-135}} \sim x_{488} + x_{488-135}\)</span>。 因此我们实际上是用<span class="math inline">\(P_{488+135} \sim x_{488} + x_{488-135}\)</span>进行预测。</p>
+</div>
+<div id="x" class="section level3">
+<h3><span class="header-section-number">2.11.2</span> 使用<span class="math inline">\(x\)</span>进行预测</h3>
+<p><span class="math display">\[P_{488+135} \sim r_{488+135} \sim x\]</span></p>
+<p>这里<span class="math inline">\(x\)</span>最大取到488， 因此， <span class="math inline">\(x = x_{488}\)</span>。 因此我们实际上是用<span class="math inline">\(P_{488+135} \sim x_{488}\)</span>进行预测。</p>
+<p>这也说明了，为什么使用<span class="math inline">\(x\)</span>进行预测效果差一些，因为自变量少了一个动量<span class="math inline">\(x_{488-135}\)</span>，这个好办，我们可以增加<span class="math inline">\(x_{t-p}\)</span>来完成好了。</p>
+<p>因此我们选择<span class="math inline">\(x\)</span>这样我们可以有更大的自由空间。</p>
+<p>这里我会做出<span class="math inline">\(x_{t-1},\cdots,x_{t-15}\)</span>给大家使用，这样大家就不用受制于<span class="math inline">\(\Delta x\)</span>。</p>
+</div>
+<div id="section-2.11.3" class="section level3">
+<h3><span class="header-section-number">2.11.3</span> 代码</h3>
+<p>因为变量很多，如果全部做<code>lag(1:15)</code>，数据表太大，会产生1.2610^{4}个新变量，没有意义，因为我们的数据集不够。 因此根据之前的随机森林结果，取前十importances高的变量做<code>lag(1:15)</code>。 <code>f6, f12, f29, f49, f50, f51, f54, f55, f82, f87</code>。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">imp10_vars &lt;-<span class="st"> </span>
+<span class="st">  </span>full_data_ipt_miss_add_return <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(rank,code,f6, f12, f29, f49, f50, f51, f54, f55, f82, f87)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dim</span>(imp10_vars)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(data.table)
+imp10_vars_w_lag_<span class="dv">15</span> &lt;-
+imp10_vars <span class="op">%&gt;%</span>
+<span class="st">   </span><span class="kw">group_by</span>(code) <span class="op">%&gt;%</span>
+<span class="st">   </span><span class="kw">do</span>(<span class="kw">data.frame</span>(.,
+                 <span class="kw">setNames</span>(<span class="kw">shift</span>(.<span class="op">$</span>f6, <span class="dv">1</span><span class="op">:</span><span class="dv">15</span>), <span class="kw">paste</span>(<span class="st">&quot;f6_lag&quot;</span>,<span class="kw">seq</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">15</span>))),
+                 <span class="kw">setNames</span>(<span class="kw">shift</span>(.<span class="op">$</span>f12, <span class="dv">1</span><span class="op">:</span><span class="dv">15</span>), <span class="kw">paste</span>(<span class="st">&quot;f12_lag&quot;</span>,<span class="kw">seq</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">15</span>))),
+                 <span class="kw">setNames</span>(<span class="kw">shift</span>(.<span class="op">$</span>f29, <span class="dv">1</span><span class="op">:</span><span class="dv">15</span>), <span class="kw">paste</span>(<span class="st">&quot;f29_lag&quot;</span>,<span class="kw">seq</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">15</span>))),
+                 <span class="kw">setNames</span>(<span class="kw">shift</span>(.<span class="op">$</span>f49, <span class="dv">1</span><span class="op">:</span><span class="dv">15</span>), <span class="kw">paste</span>(<span class="st">&quot;f49_lag&quot;</span>,<span class="kw">seq</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">15</span>))),
+                 <span class="kw">setNames</span>(<span class="kw">shift</span>(.<span class="op">$</span>f50, <span class="dv">1</span><span class="op">:</span><span class="dv">15</span>), <span class="kw">paste</span>(<span class="st">&quot;f50_lag&quot;</span>,<span class="kw">seq</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">15</span>))),
+                 <span class="kw">setNames</span>(<span class="kw">shift</span>(.<span class="op">$</span>f51, <span class="dv">1</span><span class="op">:</span><span class="dv">15</span>), <span class="kw">paste</span>(<span class="st">&quot;f51_lag&quot;</span>,<span class="kw">seq</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">15</span>))),
+                 <span class="kw">setNames</span>(<span class="kw">shift</span>(.<span class="op">$</span>f54, <span class="dv">1</span><span class="op">:</span><span class="dv">15</span>), <span class="kw">paste</span>(<span class="st">&quot;f52_lag&quot;</span>,<span class="kw">seq</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">15</span>))),
+                 <span class="kw">setNames</span>(<span class="kw">shift</span>(.<span class="op">$</span>f55, <span class="dv">1</span><span class="op">:</span><span class="dv">15</span>), <span class="kw">paste</span>(<span class="st">&quot;f55_lag&quot;</span>,<span class="kw">seq</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">15</span>))),
+                 <span class="kw">setNames</span>(<span class="kw">shift</span>(.<span class="op">$</span>f82, <span class="dv">1</span><span class="op">:</span><span class="dv">15</span>), <span class="kw">paste</span>(<span class="st">&quot;f82_lag&quot;</span>,<span class="kw">seq</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">15</span>))),
+                 <span class="kw">setNames</span>(<span class="kw">shift</span>(.<span class="op">$</span>f87, <span class="dv">1</span><span class="op">:</span><span class="dv">15</span>), <span class="kw">paste</span>(<span class="st">&quot;f87_lag&quot;</span>,<span class="kw">seq</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">15</span>)))
+                 ))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(pryr)
+<span class="kw">object_size</span>(imp10_vars_w_lag_<span class="dv">15</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(imp10_vars_w_lag_<span class="dv">15</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.tibble</span>()</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">imp10_vars_w_lag_15_partition_index &lt;-<span class="st"> </span>
+<span class="st">  </span><span class="kw">data.table</span>(<span class="dt">index =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>,<span class="dt">b =</span> <span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(imp10_vars_w_lag_<span class="dv">15</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(index)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">imp10_vars_w_lag_15_partition &lt;-<span class="st"> </span>
+<span class="kw">bind_cols</span>(imp10_vars_w_lag_<span class="dv">15</span>,imp10_vars_w_lag_15_partition_index) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(index,<span class="kw">everything</span>())</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">object_size</span>(imp10_vars_w_lag_15_partition)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">imp10_vars_w_lag_15_partition <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(index <span class="op">==</span><span class="st"> </span><span class="dv">1</span> <span class="op">|</span><span class="st"> </span>index <span class="op">==</span><span class="st"> </span><span class="dv">2</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">write_csv</span>(<span class="kw">file.path</span>(<span class="st">&quot;data&quot;</span>,<span class="st">&quot;round3_files&quot;</span>,<span class="st">&quot;imp10_vars_w_lag_15_part1.csv&quot;</span>))
+imp10_vars_w_lag_15_partition <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(index <span class="op">==</span><span class="st"> </span><span class="dv">3</span> <span class="op">|</span><span class="st"> </span>index <span class="op">==</span><span class="st"> </span><span class="dv">4</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">write_csv</span>(<span class="kw">file.path</span>(<span class="st">&quot;data&quot;</span>,<span class="st">&quot;round3_files&quot;</span>,<span class="st">&quot;imp10_vars_w_lag_15_part2.csv&quot;</span>))</code></pre></div>
+</div>
+</div>
+<div id="section-2.12" class="section level2">
+<h2><span class="header-section-number">2.12</span> 行业分类</h2>
+<p>Hierarchical clustering</p>
+<p>行业股票存在同涨同跌趋势，因此如果在<span class="math inline">\(t \in [1,488]\)</span>期间，股票的涨跌情况大多一致，那么可以认为这是一类股票，大概率属于同行业。 我们使用<code>hclust()</code>函数进行聚类。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cluster_data &lt;-<span class="st"> </span>
+full_data_ipt_miss <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(code,rank,close) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(code) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">daily_return =</span> (close<span class="op">-</span><span class="kw">lag</span>(close))<span class="op">/</span><span class="kw">lag</span>(close)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(daily_return)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(code,rank,daily_return) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">daily_return =</span> <span class="kw">ifelse</span>(daily_return <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>, <span class="dv">1</span>,<span class="dv">0</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">spread</span>(rank,daily_return)</code></pre></div>
+<p>现在不同<code>code</code>之间，<code>rank</code>数量是不一致的，我们只考虑股票都有的情况下，股票之间的相关性。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">hclust.out &lt;-<span class="st"> </span><span class="kw">hclust</span>(<span class="kw">dist</span>(<span class="kw">as.matrix</span>(cluster_data[<span class="op">-</span><span class="dv">1</span>])))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(hclust.out)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cluster_tag &lt;-<span class="st"> </span><span class="kw">cutree</span>(hclust.out,<span class="dt">k =</span> <span class="dv">5</span>)
+cluster_tag <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">table</span>()</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cluster_data <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(code) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">add_column</span>(<span class="dt">hclus_tag =</span> cluster_tag) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">write_csv</span>(<span class="kw">file.path</span>(<span class="st">&quot;data&quot;</span>,<span class="st">&quot;round3_files&quot;</span>,<span class="st">&quot;hclus_tag.csv&quot;</span>))</code></pre></div>
+<p>后续，在这基础上做同行业的PCA，做指数，最后看alpha。</p>
+</div>
+<div id="power-transformations-for-y" class="section level2">
+<h2><span class="header-section-number">2.13</span> Power Transformations for <span class="math inline">\(y\)</span></h2>
+<p><span class="math display">\[f(x) = 
+\begin{cases}
+\frac{x^{\lambda}}{x^{\lambda}-1} &amp;\text{for }\lambda \neq 0\\
+\log(x) &amp;\text{for }\lambda = 0\\
+\end{cases}\]</span></p>
+<p>用来处理左右偏，拟合成正态分布。 <span class="citation">(Box and Cox 1964,<span class="citation">Bennett and Hugen (2016)</span>, pp. 109)</span></p>
+<p>并且<span class="math inline">\(f(x)\)</span>连续，</p>
+<p><span class="math display">\[\begin{alignat}{2}
+\frac{d x^{\lambda}}{d \lambda} &amp;\xrightarrow{x^{\lambda} = e^{\lambda \log(x)}} \frac{d e^{\lambda \log(x)}}{d \lambda}
+&amp;=\log(x)e^{\lambda \log(x)}\\
+&amp;=\log(x)(e^{\log(x)})^{\lambda}\\
+&amp;=\log(x)x^{\lambda}\\
+&amp;\to \frac{d x^{\lambda}}{d \lambda}|\lambda=0 = \log(x)x^{0} = \log(x)
+\end{alignat}\]</span></p>
+<p><code>BoxCox.ar()</code><span class="citation">(Chan and Ripley 2012)</span>函数可以帮助找到最适合的<span class="math inline">\(\lambda\)</span>。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(TSA)
+<span class="kw">data</span>(hare)
+hare.transf=<span class="kw">BoxCox.ar</span>(<span class="dt">y=</span>hare)</code></pre></div>
+<p><img src="fcontest_output_files/figure-html/unnamed-chunk-80-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">hare.transf<span class="op">$</span>ci</code></pre></div>
+<pre><code>## [1] 0.3 0.7</code></pre>
+</div>
+<div id="section-2.14" class="section level2">
+<h2><span class="header-section-number">2.14</span> 指标构建思想</h2>
+<div id="normalizedlog" class="section level3">
+<h3><span class="header-section-number">2.14.1</span> 收益率&gt;需要normalized和log化</h3>
+<p>数据存在右偏，log化后，减少偏度。 要normalize的处理，保证数据更加符合标准正态分布。</p>
+<blockquote>
+<p><strong>log returns</strong> are additive but __scaled percent returns __aren’t. In other words, the five-day log return is the sum of the five one-day log returns. This is often computationally handy. <span class="citation">(Schutt and O’Neil 2013)</span></p>
+</blockquote>
+<p>并且使用log return是因为其具备可加性。</p>
+<p><span class="math display">\[\log \frac{P_{t}}{P_{t-p}} = \prod_{i=0}^{p-1}\log \frac{P_{t-i}}{P_{t-i-1}}\]</span></p>
+<p>其次，其增减对称。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">log</span>(<span class="dv">1</span><span class="op">-</span><span class="fl">0.5</span>)
+<span class="kw">log</span>(<span class="dv">1</span><span class="op">+</span><span class="dv">1</span>)</code></pre></div>
+<p>之间转换很近似。</p>
+<p><span class="math display">\[\begin{alignat}{2}
+\log(x) &amp;= \sum_{n}\frac{(x-1)^n}{n} = (x-1) - \frac{(x-1)^2}{2} + \cdots\\
+\text{log returns}&amp;=\text{scaled percent returns}-\frac{(x-1)^2}{2} + \cdots\\
+\end{alignat}\]</span></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data_frame</span>(<span class="dt">x =</span> <span class="kw">seq</span>(<span class="fl">0.01</span>,<span class="dv">5</span>,<span class="dt">by =</span> <span class="fl">0.01</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">log_x =</span> <span class="kw">log</span>(x),
+         <span class="dt">x_1 =</span> x<span class="op">-</span><span class="dv">1</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">gather</span>(key,value,<span class="op">-</span>x) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> x,<span class="dt">y=</span>value,<span class="dt">col=</span>key)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_line</span>()</code></pre></div>
+<p>在<span class="math inline">\(x=1\)</span>处非常近似。 这里的x = <span class="math inline">\(\frac{P_t}{P_{t-1}}\)</span></p>
+<div id="log-return" class="section level4">
+<h4><span class="header-section-number">2.14.1.1</span> log return的近似处理，使用泰勒公式</h4>
+<p>由泰勒公式，</p>
+<p><span class="math display">\[\begin{alignat}{2}
+\log(x+1) &amp;= \sum_{i=1}^{\infty}\frac{(-1)^{n=1}}{n}x^n = x - \frac{x^2}{2} + \frac{x^3}{3} - \cdots \\
+&amp;\approx x
+\end{alignat}\]</span></p>
+<p>定义</p>
+<p><span class="math display">\[\begin{cases}
+a_t = \frac{A_{t+1}}{A_{t}}-1\\
+b_t = \frac{B_{t+1}}{B_{t}}-1\\
+\log A_{t+1} = \gamma_0 + \gamma_1 \log B_{t+1} + \mu_{t+1} \\
+\log A_{t} = \gamma_0 + \gamma_1 \log B_{t} + \mu_{t}
+\end{cases} \\
+\begin{alignat}{2}
+\to\log A_{t+1} -\log A_{t} &amp;= \gamma_1 (\log B_{t+1} -  \log B_{t}) + ( \mu_{t+1} - \mu_{t}) \\
+\log A_{t+1} -\log A_{t} &amp;= \gamma_1 (\log B_{t+1} -  \log B_{t}) \\
+\log ((1+a)A_{t}) -\log A_{t} &amp;= \gamma_1 (\log ((1+b)B_{t}) -  \log B_{t}) \\
+\log (1+a) + \log A_{t} -\log A_{t} &amp;= \gamma_1 (\log ((1+b) + \log B_{t}-  \log B_{t}) \\
+\log (1+a) &amp;= \gamma_1 \log ((1+b)  \\
+\frac{\log (1+a)}{ \log ((1+b)} &amp;= \gamma_1   \\
+\frac{a}{b} &amp;\approx \gamma_1   \\
+frac{a \times 100 \%}{b \times 100 \%} &amp;\approx \gamma_1   \\
+\end{alignat}
+\]</span></p>
+</div>
+</div>
+<div id="section-2.14.2" class="section level3">
+<h3><span class="header-section-number">2.14.2</span> 风险&gt;权重衰减</h3>
+<p>风险度量我们可以直接使用标准差，但是我们想尽可能的表现距离近的影响大于距离远的影响。 <mark>Exponential Downweighting</mark><span class="citation">(Schutt and O’Neil 2013)</span>是解决办法之一。 这里类似于现金流预测，加入一个折现率<span class="math inline">\(s\)</span>。</p>
+<p><span class="math display">\[\begin{alignat}{2}
+\text{Var}_{old} &amp;= \frac{\sum_i s^i \cdot r_i^2}{\sum_i s^i}\\
+&amp;=\frac{\sum_i s^i \cdot r_i^2}{\frac{1}{1-s}}\\
+&amp;=(1-s)\sum_i s^i \cdot r_i^2\\
+\end{alignat}\]</span></p>
+<p><span class="math display">\[\text{Var}_{new} = s\text{Var}_{old} + (1-s)r_0^2\]</span></p>
+<p><span class="math inline">\(r_0\)</span>表示当期的收益率，假设<span class="math inline">\(E(r_0)=0\)</span>，因此<span class="math inline">\(\text{Var}(r_0) = E(r_0-E(r_0))^2=r_0^2\)</span></p>
+<p>这个<span class="math inline">\(s\)</span>一般可以用0<span class="math inline">\(.97\)</span>等近似于但小于1的数假设。</p>
+</div>
+<div id="section-2.14.3" class="section level3">
+<h3><span class="header-section-number">2.14.3</span> 使用先验信息</h3>
+<p>类似于AR模型，我们使用<span class="math inline">\(y_{t-p}\)</span>预测<span class="math inline">\(y_t\)</span>，但是这一次我们将其写入损失函数中。<span class="citation">(Schutt and O’Neil 2013)</span></p>
+<p><span class="math display">\[\begin{alignat}{2}
+L &amp;= \sigma(y-\hat y) + \gamma(\beta) + \rho(\beta_j-\beta_{j+1})\\
+&amp;\begin{cases}
+\sigma(y-\hat y) &amp;\sim \frac{1}{N}\sum_i (y-x\beta)^2 &amp;\sim \text{RMSE}\\
+\gamma(\beta) &amp;\sim  \sum_j(\beta)^2 &amp;\sim \text{正则化}\\
+\rho(\beta_j-\beta_{j+1}) &amp;\sim \sum_j(\beta_j-\beta_{j+1})^2 &amp;\sim \text{smoothing}\\
+\end{cases}
+\end{alignat}\]</span></p>
+<blockquote>
+<p>adjacent coefficients should be not too different from each other. <span class="citation">(Schutt and O’Neil 2013)</span></p>
+</blockquote>
+<p><span class="math inline">\(\rho(\beta_j-\beta_{j+1})\)</span>要求我们可以用滞后项去预测，但是中间的自相关系数不能跳变太大，否则不符合我们的直觉。 但是这样构建一个函数处理，但是我目前没看到包直接可以调用这种损失函数。</p>
+</div>
+</div>
+<div id="section-2.15" class="section level2">
+<h2><span class="header-section-number">2.15</span> 时间选择解释</h2>
+<p>按照 <span class="citation">DataCastle小运营 (2018)</span> 官方解释，488天，一定要损失<span class="math inline">\(\frac{1}{4}\)</span>数据，具体见链接(<a href="http://u6.gg/dqv2b" class="uri">http://u6.gg/dqv2b</a>)。</p>
+<p>D4这一时间段的数据是必须损失的， 而且损失的是D4，非D1，因此是损失靠后，而非靠前的数据。 <code>窗口滚动预测</code><span class="citation">(DataCastle小运营 2018)</span>中，官方认可了D2和D4都作为 <strong>预测集</strong>，我推测，不一定是最后的数据一定是就是最好的，而是D2和D4都可以作为预测集，数据表现为每年的下半年数据。 我觉得是符合逻辑的，因为我们注意看，如果我们把488天分开来看，第一年是大涨后跌又大涨的，然而第二年似乎比较平缓，也许这两个下半年都是一个周期性的表现，说不准，因此预测未来半年收益率，测试集选D2和D4，比较合理。 这里的向量合并参考 <span class="citation">Wickham (2014)</span>。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pca_index_table_add_return &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="kw">file.path</span>(<span class="st">&quot;data&quot;</span>,<span class="st">&quot;round3_files&quot;</span>,<span class="st">&quot;pca_index_table.csv&quot;</span>))
+pca_index_table_add_return <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(PC1) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">rank =</span> <span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(.),
+         <span class="dt">type =</span> 
+           <span class="kw">c</span>(
+             <span class="kw">rep</span>(<span class="dv">1</span>,<span class="dt">times =</span> <span class="dv">244</span>),
+             <span class="kw">rep</span>(<span class="dv">2</span>,<span class="dt">times =</span> <span class="dv">353</span><span class="op">-</span><span class="dv">244</span>))
+         ) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> rank, <span class="dt">y =</span> PC1, <span class="dt">col=</span><span class="kw">as.factor</span>(type))) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_line</span>()</code></pre></div>
+<p><img src="fcontest_output_files/figure-html/unnamed-chunk-83-1.png" width="672" /></p>
+<p>麻婆豆腐的python代码，蛮有意思的，我有空看看啥意思。</p>
+</div>
+<div id="arima" class="section level2">
+<h2><span class="header-section-number">2.16</span> arima预测半年收益率</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tibbletime)
+<span class="kw">library</span>(forecast)
+arima_fun &lt;-<span class="st"> </span><span class="cf">function</span>(data){
+  <span class="kw">auto.arima</span>(
+  data <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="co"># full_data_ipt_miss_add_return %&gt;% </span>
+<span class="st">  </span><span class="co"># filter(code %in% unique(full_data_ipt_miss_add_return$code)[1:3]) %&gt;% # 用小样本进行检验</span>
+<span class="st">      </span>.<span class="op">$</span>return
+  ) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">forecast</span>(.,<span class="dt">h=</span><span class="dv">488</span><span class="op">/</span><span class="dv">4</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">as.data.frame</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">tail</span>(<span class="dv">1</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">mutate</span>(<span class="dt">sd =</span> (<span class="st">`</span><span class="dt">Hi 95</span><span class="st">`</span><span class="op">-</span><span class="st">`</span><span class="dt">Lo 95</span><span class="st">`</span>)<span class="op">/</span><span class="dv">3</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">rename</span>(<span class="dt">avg =</span> <span class="st">`</span><span class="dt">Point Forecast</span><span class="st">`</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">select</span>(avg,sd) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">gather</span>()
+}</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">arima_result &lt;-<span class="st"> </span>
+full_data_ipt_miss_add_return <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="co"># filter(code %in% unique(full_data_ipt_miss_add_return$code)[1:3]) %&gt;% # 用小样本进行检验</span>
+<span class="st">  </span><span class="kw">select</span>(rank,code,return) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">rank =</span> <span class="kw">as.Date</span>(rank)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">as_tbl_time</span>(<span class="dt">index =</span> rank) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(code) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">nest</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">model =</span> <span class="kw">map</span>(data, arima_fun)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(code,model) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">unnest</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">spread</span>(key,value) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">zscore =</span> avg<span class="op">/</span>sd) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(zscore))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">arima_result <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">head</span>(<span class="dv">20</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">write_csv</span>(<span class="kw">file.path</span>(<span class="st">&quot;data&quot;</span>,<span class="st">&quot;round3_files&quot;</span>,<span class="st">&quot;arima_by_target.csv&quot;</span>))
+arima_result <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(avg)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">head</span>(<span class="dv">20</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">write_csv</span>(<span class="kw">file.path</span>(<span class="st">&quot;data&quot;</span>,<span class="st">&quot;round3_files&quot;</span>,<span class="st">&quot;arima_by_avg.csv&quot;</span>))</code></pre></div>
+</div>
+</div>
+<div id="section-3" class="section level1">
+<h1><span class="header-section-number">3</span> 模型方法</h1>
+<div id="naive-group" class="section level2">
+<h2><span class="header-section-number">3.1</span> naive group</h2>
+<div id="naive" class="section level3">
+<h3><span class="header-section-number">3.1.1</span> naive</h3>
+<p>我是相当于每个rank，选出半年收益率最高的五十个，最后汇总起来，哪个股票出现频次越多，就越容易选上。但是最后我只选前30，这个数字只是好奇的选的。</p>
+<p><span class="math display">\[\begin{alignat}{2}
+\forall i: \frac{P_{488+135}^{i}-P_{488}^{i}}{P_{488}^{i}} = r_{488}^{i} &amp;\sim f^{i}(r_1,\cdots,r_{353})\\
+&amp;\sim \sum_{j=1}^{353}\mathcal I(r_j^i \text{ is top 50}) = \\
+&amp;\to \text{choose top 30} \hat f^{i}(r_1,\cdots,r_{353})
+\end{alignat}\]</span></p>
+<p>因此这里实际上把回归问题转化为一个分类问题<span class="math inline">\(\mathcal I(r_j^i \text{ is top 50})\)</span>，但是也还是只用了<span class="math inline">\(r\)</span>的信息，没有使用<span class="math inline">\(x\)</span>，正说明了滞后项、<span class="math inline">\(r\)</span>信息很重要。</p>
+<p><span class="math display">\[\mathcal I(y) = 
+\begin{cases}
+1&amp;\text{, y is true}\\
+0&amp;\text{, y is false}\\
+\end{cases}\]</span></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">all_data <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="co"># names()</span>
+<span class="st">  </span><span class="kw">select</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(code) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">close_lag =</span> <span class="kw">lag</span>(close,<span class="dv">135</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(close_lag)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">return =</span> (close<span class="op">-</span>close_lag)<span class="op">/</span>close_lag<span class="op">*</span><span class="dv">100</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="co"># distinct(rank)</span>
+<span class="st">  </span><span class="kw">group_by</span>(rank) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">top_n</span>(<span class="dv">50</span>,return) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(code) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">count</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(n)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">top_n</span>(<span class="dv">30</span>,n) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">write_csv</span>(<span class="kw">file.path</span>(<span class="st">&quot;data&quot;</span>,<span class="st">&quot;round3_files&quot;</span>,<span class="st">&quot;naive_30.csv&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(<span class="kw">everything</span>())</code></pre></div>
+</div>
+<div id="naive-2.0" class="section level3">
+<h3><span class="header-section-number">3.1.2</span> naive 2.0</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">full_data_ipt_miss <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(code) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">close_lag =</span> <span class="kw">lag</span>(close,<span class="dv">135</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(close_lag)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">return =</span> (close<span class="op">-</span>close_lag)<span class="op">/</span>close_lag<span class="op">*</span><span class="dv">100</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="co"># distinct(rank)</span>
+<span class="st">  </span><span class="kw">group_by</span>(rank) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">top_n</span>(<span class="dv">50</span>,return) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(code) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">count</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(n)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">top_n</span>(<span class="dv">30</span>,n) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">write_csv</span>(<span class="kw">file.path</span>(<span class="st">&quot;data&quot;</span>,<span class="st">&quot;round3_files&quot;</span>,<span class="st">&quot;naive_30_2.0.csv&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(<span class="kw">everything</span>())  </code></pre></div>
+<ul>
+<li><a href="https://stackoverflow.com/questions/34517370/group-by-into-fill-not-working-as-expected">r - group_by() into fill() not working as expected - Stack Overflow</a></li>
+</ul>
+</div>
+<div id="naive-3.0" class="section level3">
+<h3><span class="header-section-number">3.1.3</span> naive 3.0</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(TTR)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">20</span>)
+a
+<span class="kw">SMA</span>(a,<span class="dv">6</span>)</code></pre></div>
+<p>移动平均: 对的，相当于我做了稳定性处理，也就是说这个处理过的收益率是吸收了风险的。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">unique_rank &lt;-<span class="st"> </span>
+all_data <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(code) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">count</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">arrange</span>(n) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(n <span class="op">&gt;</span><span class="st"> </span><span class="dv">158</span>)
+
+all_data <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(code <span class="op">%in%</span><span class="st"> </span>unique_rank<span class="op">$</span>code) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(code) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">close_lag =</span> <span class="kw">lag</span>(close,<span class="dv">135</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(close_lag)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">return =</span> (close<span class="op">-</span>close_lag)<span class="op">/</span>close_lag<span class="op">*</span><span class="dv">100</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">return_SMA_7 =</span> <span class="kw">SMA</span>(return,<span class="dv">7</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(rank,code,return,return_SMA_<span class="dv">7</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(return_SMA_<span class="dv">7</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="co"># distinct(rank)</span>
+<span class="st">  </span><span class="kw">group_by</span>(rank) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">top_n</span>(<span class="dv">50</span>,return_SMA_<span class="dv">7</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(code) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">count</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(n)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">top_n</span>(<span class="dv">30</span>,n) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">write_csv</span>(<span class="kw">file.path</span>(<span class="st">&quot;data&quot;</span>,<span class="st">&quot;round3_files&quot;</span>,<span class="st">&quot;naive_30_3.0.csv&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(<span class="kw">everything</span>()) </code></pre></div>
+</div>
+<div id="naive-4.0" class="section level3">
+<h3><span class="header-section-number">3.1.4</span> naive 4.0</h3>
+<p>我们发现在naive的答案中，第一个是最naive的，但是还是非常坚挺的。 我觉得可以控制<code>i</code>和<code>j</code>两个<code>top_n</code>的参数或许得到提升，这是一个最优化的问题， 最后感觉的确得到了提升。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">valid_avg_return &lt;-<span class="st"> </span>
+full_data_ipt_miss_add_return <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(rank <span class="op">&gt;</span><span class="st"> </span><span class="dv">117</span>,rank <span class="op">&lt;</span><span class="st"> </span><span class="dv">235</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(rank,code,return) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(code) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">return =</span> <span class="kw">mean</span>(return))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">choose_best_boundary &lt;-<span class="st"> </span><span class="cf">function</span>(i,j){
+all_data <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="co"># names()</span>
+<span class="st">  </span><span class="kw">select</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(code) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">close_lag =</span> <span class="kw">lag</span>(close,<span class="dv">135</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(close_lag)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">return =</span> (close<span class="op">-</span>close_lag)<span class="op">/</span>close_lag<span class="op">*</span><span class="dv">100</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="co"># distinct(rank)</span>
+<span class="st">  </span><span class="kw">group_by</span>(rank) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">top_n</span>(i,return) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(code) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">count</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(n)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">top_n</span>(j,n) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">left_join</span>(valid_avg_return,<span class="dt">by=</span><span class="st">&quot;code&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="kw">mean</span>(return)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">pull</span>()
+}</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">grid_boundary &lt;-<span class="st"> </span>
+<span class="kw">expand.grid</span>(<span class="dt">i =</span> <span class="kw">seq</span>(<span class="dv">20</span>,<span class="dv">25</span>,<span class="dv">1</span>), <span class="dt">j =</span> <span class="kw">seq</span>(<span class="dv">20</span>,<span class="dv">25</span>,<span class="dv">1</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">return =</span> <span class="kw">map2_dbl</span>(i,j,choose_best_boundary))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">grid_boundary <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(return))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">all_data <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="co"># names()</span>
+<span class="st">  </span><span class="kw">select</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(code) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">close_lag =</span> <span class="kw">lag</span>(close,<span class="dv">135</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(close_lag)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">return =</span> (close<span class="op">-</span>close_lag)<span class="op">/</span>close_lag<span class="op">*</span><span class="dv">100</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="co"># distinct(rank)</span>
+<span class="st">  </span><span class="kw">group_by</span>(rank) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">top_n</span>(<span class="dv">21</span>,return) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(code) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">count</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(n)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">top_n</span>(<span class="dv">21</span>,n) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">write_csv</span>(<span class="kw">file.path</span>(<span class="st">&quot;data&quot;</span>,<span class="st">&quot;round3_files&quot;</span>,<span class="st">&quot;naive_30_4.0.csv&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(<span class="kw">everything</span>())</code></pre></div>
+</div>
+</div>
+<div id="mu-sigma" class="section level2">
+<h2><span class="header-section-number">3.2</span> <span class="math inline">\(\mu, \sigma\)</span></h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">full_data_ipt_miss_mu_sigma <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(tvalue)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">head</span>(<span class="dv">30</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">write_csv</span>(<span class="kw">file.path</span>(<span class="st">&quot;data&quot;</span>,<span class="st">&quot;round3_files&quot;</span>,<span class="st">&quot;mu_sigma_30.csv&quot;</span>))</code></pre></div>
+</div>
+<div id="linear-regression" class="section level2">
+<h2><span class="header-section-number">3.3</span> linear regression</h2>
+<div id="sur-close" class="section level3">
+<h3><span class="header-section-number">3.3.1</span> SUR close</h3>
+<p>相比较于面板数据的模型，考虑了个体效应，SUR还允许了不同个体拥有不同的<span class="math inline">\(\beta\)</span>。</p>
+<p>Unlike the panel data models considered in the preceding section, which permit only individual-specific intercepts, the SUR model also allows for individual-specific slopes. <span class="citation">(Kleiber and Zeileis 2008)</span></p>
+<pre><code>library(systemfit)
+code_choice &lt;- full_data_ipt_miss_wo_scale %&gt;% distinct(code) %&gt;% .$code %&gt;% head(50)
+test_SUR &lt;- subset(full_data_ipt_miss_wo_scale, code %in% code_choice)
+library(plm)
+test_SUR_plm &lt;- plm.data(test_SUR, c(&quot;code&quot;,&quot;rank&quot;))
+test_SUR_model &lt;- systemfit(return ~ f1, method = &quot;SUR&quot;, data = test_SUR_plm)</code></pre>
+<p><code>Error in LU.dgC(a) : cs_lu(A) failed: near-singular A (or out of memory)</code></p>
+<pre><code>library(broom)
+for (i in seq(length(code_choice))){
+summary(test_SUR_model)$eq[[i]]$coefficients %&gt;% as.data.frame() %&gt;% print()
+}</code></pre>
+</div>
+<div id="ols" class="section level3">
+<h3><span class="header-section-number">3.3.2</span> OLS</h3>
+<div id="get-delta-x" class="section level4">
+<h4><span class="header-section-number">3.3.2.1</span> get <span class="math inline">\(\Delta x\)</span></h4>
+<div id="idf" class="section level5">
+<h5><span class="header-section-number">3.3.2.1.1</span> 控制id和f的数量</h5>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">code_limit &lt;-<span class="st"> </span>
+<span class="st">  </span>full_data_ipt_miss_add_return <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">distinct</span>(code) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>.<span class="op">$</span>code <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">head</span>(<span class="dv">2</span><span class="op">+</span><span class="dv">1000</span>)
+f_limit &lt;-<span class="st"> </span>
+<span class="st">  </span><span class="kw">names</span>(full_data_ipt_miss_add_return) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">str_subset</span>(<span class="st">&quot;code|f</span><span class="ch">\\</span><span class="st">d{1,2}|return|index&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">head</span>(<span class="dv">2</span><span class="op">+</span><span class="dv">1000</span>)</code></pre></div>
+</div>
+</div>
+<div id="get-x-close" class="section level4">
+<h4><span class="header-section-number">3.3.2.2</span> get x close</h4>
+<p>我想过是不是因为<span class="math inline">\(\Delta x\)</span>和<span class="math inline">\(x\)</span>不一样导致的，但是我用<code>biglm</code>作为例子试过了，发现并非如此。 <mark>这个猜想无效的</mark>。</p>
+<p>这也解释了为什么xgboost效果也不行，因为<span class="math inline">\(x\)</span>是trivial的。</p>
+</div>
+<div id="modeling" class="section level4">
+<h4><span class="header-section-number">3.3.2.3</span> modeling</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model_text &lt;-<span class="st"> </span>
+<span class="kw">paste</span>(<span class="st">&quot;return&quot;</span>,
+      f_limit <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">str_subset</span>(<span class="st">&quot;f|index&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">paste</span>(<span class="dt">collapse =</span> <span class="st">&quot;+&quot;</span>),
+      <span class="dt">sep =</span> <span class="st">&quot;~&quot;</span>)</code></pre></div>
+<pre><code>dataset_big_ols &lt;- function(x){
+  x %&gt;% 
+    select(f_limit) %&gt;%
+    filter(code %in% code_limit)
+}    
+test_big_OLS &lt;- dataset_big_ols(full_data_ipt_miss_add_return)  
+test_big_OLS_return_only &lt;- dataset_big_ols(full_data_ipt_miss_add_return_only)  
+library(biganalytics)
+library(broom)
+
+get_ols_output &lt;- function(x){
+  x %&gt;%
+    group_by(code) %&gt;%
+    nest() %&gt;%
+    mutate(model = map(data, 
+                       function(df){biglm(as.formula(model_text), data = df) %&gt;%
+                       # function(df){biglm(return ~., 
+                       #                    data = df %&gt;% 
+                       #                      select_if(function(y){n_distinct(y)&gt;1})
+                           tidy()})) %&gt;%
+    select(code,model) %&gt;%
+    unnest() %&gt;%
+    filter(term == &quot;(Intercept)&quot;) %&gt;%
+    arrange(desc(estimate))
+}
+
+ols_alpha_output &lt;- get_ols_output(test_big_OLS)
+# ols_alpha_output_return_only &lt;- get_ols_output(test_big_OLS_return_only)</code></pre>
+<p><code>select_if(function(y){n_distinct(y)&gt;1})</code> 这个地方的报错没有解决， <code>Error in mutate_impl(.data, dots) : variable 'y' not found</code> 原因是这个变量不能识别。</p>
+<p><code>Error in mutate_impl(.data, dots) : Evaluation error: NA/NaN/Inf in foreign function call (arg 3).</code> <code>ols_alpha_output_return_only</code>run不出来。</p>
+</div>
+<div id="perf" class="section level4">
+<h4><span class="header-section-number">3.3.2.4</span> perf</h4>
+<pre><code>library(broom)
+get_ols_perf &lt;- function(x){
+  x %&gt;%
+    group_by(code) %&gt;%
+    nest() %&gt;%
+    mutate(model = map(data, 
+                       function(df){biglm(as.formula(model_text), data = df) %&gt;%
+                           glance()})) %&gt;%
+    select(code,model) %&gt;%
+    unnest()
+}
+ols_alpha_perf &lt;- get_ols_perf(test_big_OLS)
+ols_alpha_perf_return_only &lt;- get_ols_perf(test_big_OLS_return_only)</code></pre>
+<pre><code>ols_alpha_perf %&gt;% 
+  select(code,r.squared) %&gt;% 
+  rename(rsq = r.squared) %&gt;% 
+  left_join(
+    ols_alpha_perf_return_only %&gt;% 
+      select(code,r.squared) %&gt;% 
+      rename(rsq_only = r.squared),
+    by = &quot;code&quot;
+  ) %&gt;% 
+  mutate(delta_rsq = rsq-rsq_only) %&gt;% 
+  ggplot(aes(x = delta_rsq)) +
+    geom_freqpoly()</code></pre>
+<p><span class="math inline">\(\Delta x\)</span>效果明显强于<span class="math inline">\(x\)</span>，比较每个<code>code</code>的<span class="math inline">\(R^2\)</span>。 但是我们无法get <span class="math inline">\(t = 488\)</span>这天的<span class="math inline">\(\Delta x\)</span>只有<span class="math inline">\(x\)</span>。 但是实际上，我们拿到的<span class="math inline">\(\Delta x\)</span>也包含了<span class="math inline">\(x_{488}\)</span>和<span class="math inline">\(x_{488-135}\)</span>的信息，没差，可能就是说<span class="math inline">\(\Delta x\)</span>是相减得到的，损失了一部分信息，但是如果这个剪完就是0了，说明这个变量很稳定，对y的预测效果很少啊。 所以还是follow<span class="math inline">\(\Delta x\)</span>的思路。</p>
+<pre><code>ols_alpha_output %&gt;%
+  filter(p.value &lt; 0.05) %&gt;%
+  top_n(30,estimate) %&gt;%
+  write_csv(&quot;biglm_alpha_top_30.csv&quot;)
+ols_alpha_output_return_only %&gt;%
+  filter(p.value &lt; 0.05) %&gt;%
+  top_n(30,estimate) %&gt;%
+  write_csv(&quot;biglm_alpha_top_30_return_only.csv&quot;)</code></pre>
+<p>SUR模型在Python和R上都失败了，这里使用<code>biglm</code>建立各公司之间独立的OLS回归，找<span class="math inline">\(\alpha\)</span>最大的前30.</p>
+<p><code>biglm_alpha_top_30.csv</code> 数据下载地址, <a href="http://p24kaozv6.bkt.clouddn.com/biglm_alpha_top_30.csv" class="uri">http://p24kaozv6.bkt.clouddn.com/biglm_alpha_top_30.csv</a></p>
+</div>
+</div>
+</div>
+<div id="hat-y2" class="section level2">
+<h2><span class="header-section-number">3.4</span> 加入<span class="math inline">\({\hat y}^2\)</span></h2>
+<p>考虑平方项</p>
+</div>
+<div id="xgboost" class="section level2">
+<h2><span class="header-section-number">3.5</span> xgboost</h2>
+<div id="import-data" class="section level3">
+<h3><span class="header-section-number">3.5.1</span> import data</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">full_data_ipt_miss_wo_scale &lt;-<span class="st"> </span>full_data_ipt_miss_add_return</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">dim</span>(full_data_ipt_miss_wo_scale)
+<span class="kw">dim</span>(three_index_table)</code></pre></div>
+</div>
+<div id="train-test-split" class="section level3">
+<h3><span class="header-section-number">3.5.2</span> train test split</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">full_data_ipt_miss_wo_scale_add_three &lt;-<span class="st"> </span>
+full_data_ipt_miss_wo_scale <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">left_join</span>(three_index_table,<span class="dt">by=</span><span class="st">&quot;rank&quot;</span>)
+xgboost_train &lt;-<span class="st"> </span>full_data_ipt_miss_wo_scale_add_three <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(rank <span class="op">&lt;=</span><span class="st"> </span><span class="dv">117</span>)
+xgboost_valid &lt;-<span class="st"> </span>full_data_ipt_miss_wo_scale_add_three <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(rank <span class="op">&gt;</span><span class="st"> </span><span class="dv">117</span>, rank <span class="op">&lt;=</span><span class="st"> </span><span class="dv">235</span>)
+xgboost_test  &lt;-<span class="st"> </span>full_data_ipt_miss_wo_scale_add_three <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(rank <span class="op">&gt;</span><span class="st"> </span><span class="dv">235</span>)</code></pre></div>
+</div>
+<div id="dmatrix" class="section level3">
+<h3><span class="header-section-number">3.5.3</span> dmatrix</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(xgboost)
+get_dmatrix &lt;-<span class="st"> </span><span class="cf">function</span>(x){
+  <span class="kw">xgb.DMatrix</span>(<span class="dt">data =</span> <span class="kw">as.matrix</span>(x <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(<span class="op">-</span>code,<span class="op">-</span>return)),
+              <span class="dt">label =</span> x<span class="op">$</span>return)
+}
+xgboost_dtrain &lt;-<span class="st"> </span><span class="kw">get_dmatrix</span>(xgboost_train)
+xgboost_dvalid &lt;-<span class="st"> </span><span class="kw">get_dmatrix</span>(xgboost_valid)
+xgboost_dtest &lt;-<span class="st"> </span><span class="kw">get_dmatrix</span>(xgboost_test)
+
+watchlist  &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">train =</span> xgboost_dtrain,
+                    <span class="dt">test =</span> xgboost_dvalid)</code></pre></div>
+</div>
+<div id="modeling-1" class="section level3">
+<h3><span class="header-section-number">3.5.4</span> modeling</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">xgb &lt;-<span class="st"> </span><span class="kw">xgb.train</span>(
+ <span class="dt">data               =</span> xgboost_dtrain,
+ <span class="co"># 1</span>
+   <span class="dt">eta              =</span> <span class="fl">0.1</span>,
+   <span class="dt">nround           =</span> <span class="dv">2000</span>,
+   <span class="co"># 这里也是没有办法，为了调整参数，所以设置了很高的学习率，nround少于100次</span>
+   <span class="co"># 最后可以尝试更低的。</span>
+ <span class="co"># 2</span>
+   <span class="dt">max_depth        =</span> <span class="dv">7</span>,
+   <span class="dt">min_child_weight =</span> <span class="dv">17</span>,  
+   <span class="dt">gamma            =</span> <span class="fl">0.72</span>,
+ <span class="co"># 3</span>
+   <span class="dt">subsample        =</span> <span class="fl">0.8</span>,
+   <span class="dt">colsample_bytree =</span> <span class="fl">0.95</span>,
+ <span class="co"># 评价标准</span>
+   <span class="co"># eval.metric    = &quot;error&quot;,</span>
+   <span class="co"># eval.metric    = &quot;rmse&quot;,</span>
+   <span class="co"># eval.metric    = ks_value,</span>
+   <span class="co"># eval.metric      = &quot;auc&quot;,</span>
+   <span class="co"># eval.metric    = &quot;logloss&quot;,</span>
+ <span class="co"># objective</span>
+   <span class="dt">objective        =</span> <span class="st">&quot;reg:linear&quot;</span>, <span class="co"># 这是一个回归问题</span>
+ <span class="co"># 其他</span>
+   <span class="dt">seed             =</span> <span class="dv">123</span>,
+   <span class="dt">watchlist        =</span> watchlist,
+   <span class="co"># 300万数据一起用！</span>
+   <span class="dt">nfold            =</span> <span class="dv">5</span>,
+   <span class="dt">early.stop       =</span> <span class="dv">50</span>,
+   <span class="dt">nthread          =</span> <span class="dv">8</span>
+   )</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(pryr)
+<span class="kw">object_size</span>(xgb)
+<span class="kw">xgb.save</span>(xgb, <span class="kw">file.path</span>(<span class="st">&quot;data&quot;</span>,<span class="st">&quot;round3_files&quot;</span>,<span class="st">&quot;fcontest_xgboost.model&quot;</span>))</code></pre></div>
+</div>
+<div id="perf-1" class="section level3">
+<h3><span class="header-section-number">3.5.5</span> perf</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fcontest_xgb &lt;-<span class="st"> </span><span class="kw">xgb.load</span>(<span class="kw">file.path</span>(<span class="st">&quot;data&quot;</span>,<span class="st">&quot;round3_files&quot;</span>,<span class="st">&quot;fcontest_xgboost.model&quot;</span>))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(xgboost)
+<span class="kw">length</span>(<span class="kw">predict</span>(fcontest_xgb,xgboost_dvalid))
+<span class="kw">dim</span>(xgboost_valid)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">xgboost_valid_add_yhat &lt;-<span class="st"> </span>
+xgboost_valid <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(rank,code,return) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">add_column</span>(<span class="dt">return_pred =</span> <span class="kw">predict</span>(fcontest_xgb,xgboost_dvalid))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">xgboost_30_list &lt;-<span class="st"> </span>
+xgboost_valid_add_yhat <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(rank) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">top_n</span>(<span class="dv">50</span>,return_pred) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(code) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">count</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(n)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">top_n</span>(<span class="dv">30</span>,n) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">write_csv</span>(<span class="kw">file.path</span>(<span class="st">&quot;data&quot;</span>,<span class="st">&quot;round3_files&quot;</span>,<span class="st">&quot;xgboost_30.csv&quot;</span>))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">xgboost_30_list</code></pre></div>
+</div>
+</div>
+<div id="xgboost-add-lag-y" class="section level2">
+<h2><span class="header-section-number">3.6</span> xgboost add lag y</h2>
+</div>
+<div id="xgboost-classification" class="section level2">
+<h2><span class="header-section-number">3.7</span> xgboost classification</h2>
+</div>
+<div id="section-3.8" class="section level2">
+<h2><span class="header-section-number">3.8</span> 引入相关性</h2>
+<p>使用最好的的结果<code>&quot;naive_30_3.0.csv&quot;</code>，进行分析。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<span class="kw">library</span>(reshape2)
+cor_list &lt;-<span class="st"> </span><span class="cf">function</span>(x) {
+  L &lt;-<span class="st"> </span>M &lt;-<span class="st"> </span><span class="kw">cor</span>(x)
+  
+  M[<span class="kw">lower.tri</span>(M, <span class="dt">diag =</span> <span class="ot">TRUE</span>)] &lt;-<span class="st"> </span><span class="ot">NA</span>
+  M &lt;-<span class="st"> </span><span class="kw">melt</span>(M)
+  <span class="kw">names</span>(M)[<span class="dv">3</span>] &lt;-<span class="st"> &quot;points&quot;</span>
+  <span class="co"># lower.tri就是i比j大，而已。</span>
+  L[<span class="kw">upper.tri</span>(L, <span class="dt">diag =</span> <span class="ot">TRUE</span>)] &lt;-<span class="st"> </span><span class="ot">NA</span>
+  L &lt;-<span class="st"> </span><span class="kw">melt</span>(L)
+  <span class="kw">names</span>(L)[<span class="dv">3</span>] &lt;-<span class="st"> &quot;labels&quot;</span>
+  
+  <span class="kw">merge</span>(M, L)
+}
+
+
+<span class="kw">read_csv</span>(<span class="kw">file.path</span>(<span class="st">&quot;data&quot;</span>,<span class="st">&quot;round3_files&quot;</span>,<span class="st">&quot;naive_30_3.0.csv&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(code) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">left_join</span>(full_data_ipt_miss_add_return, <span class="dt">by =</span> <span class="st">&quot;code&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(code,rank,return) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">spread</span>(code,return) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>rank) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">do</span>(<span class="kw">cor_list</span>(.)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(points)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(Var1) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">avg_cor =</span> <span class="kw">mean</span>(points),<span class="dt">sd_cor =</span> <span class="kw">sd</span>(points),
+            <span class="dt">z_cor =</span> avg_cor<span class="op">/</span>sd_cor) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">arrange</span>(<span class="kw">abs</span>(z_cor))
+  <span class="co"># arrange(z_cor)</span>
+  <span class="co"># arrange(sd_cor)</span></code></pre></div>
+<ul>
+<li>round1:
+<ul>
+<li>z-score:
+<ul>
+<li>min: <code>stock103391</code></li>
+<li>max: <code>stock103501</code></li>
+<li>0 : <code>stock102682</code>，有效。</li>
+</ul></li>
+<li>sd:
+<ul>
+<li><code>stock103445</code></li>
+</ul></li>
+</ul></li>
+<li>round2:
+<ul>
+<li>z-score:
+<ul>
+<li>min: <code>stock102109</code></li>
+<li>max: <code>stock102853</code></li>
+<li>0 : <code>stock101653</code>，有效。</li>
+</ul></li>
+<li>sd:
+<ul>
+<li><code>stock102253</code></li>
+</ul></li>
+</ul></li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read_csv</span>(<span class="kw">file.path</span>(<span class="st">&quot;data&quot;</span>,<span class="st">&quot;round3_files&quot;</span>,<span class="st">&quot;naive_30_3.0.csv&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(code <span class="op">!=</span><span class="st"> &quot;stock102109&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">write_csv</span>(<span class="kw">file.path</span>(<span class="st">&quot;data&quot;</span>,<span class="st">&quot;round3_files&quot;</span>,<span class="st">&quot;cor_z_score_lower.csv&quot;</span>))
+<span class="kw">read_csv</span>(<span class="kw">file.path</span>(<span class="st">&quot;data&quot;</span>,<span class="st">&quot;round3_files&quot;</span>,<span class="st">&quot;naive_30_3.0.csv&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(code <span class="op">!=</span><span class="st"> &quot;stock102853&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">write_csv</span>(<span class="kw">file.path</span>(<span class="st">&quot;data&quot;</span>,<span class="st">&quot;round3_files&quot;</span>,<span class="st">&quot;cor_z_score_upper.csv&quot;</span>))
+<span class="kw">read_csv</span>(<span class="kw">file.path</span>(<span class="st">&quot;data&quot;</span>,<span class="st">&quot;round3_files&quot;</span>,<span class="st">&quot;naive_30_3.0.csv&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(code <span class="op">!=</span><span class="st"> &quot;stock101155&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">write_csv</span>(<span class="kw">file.path</span>(<span class="st">&quot;data&quot;</span>,<span class="st">&quot;round3_files&quot;</span>,<span class="st">&quot;cor_z_score_zero.csv&quot;</span>))
+<span class="kw">read_csv</span>(<span class="kw">file.path</span>(<span class="st">&quot;data&quot;</span>,<span class="st">&quot;round3_files&quot;</span>,<span class="st">&quot;naive_30_3.0.csv&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(code <span class="op">!=</span><span class="st"> &quot;stock102253&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">write_csv</span>(<span class="kw">file.path</span>(<span class="st">&quot;data&quot;</span>,<span class="st">&quot;round3_files&quot;</span>,<span class="st">&quot;cor_sd_lower.csv&quot;</span>))</code></pre></div>
+<div id="p" class="section level3">
+<h3><span class="header-section-number">3.8.1</span> 增加p值</h3>
+<p>我更新了各个股票之间的相关性情况，之前只有相关系数<span class="math inline">\(\rho\)</span>，没有显著水平，因此可能产生误导。 我的打算是，选取<span class="math inline">\(\rho&gt;0.8\)</span>并且<span class="math inline">\(\text{p value} &lt; 0.05\)</span>的股票作为研究。 这个数据怎么用我也没想好，我起初想，如果我们选择上传的的股票中，对应的显著正相关的股票没有选择的话，我们可以看看什么原因导致我们没选上这个显著正相关的股票。</p>
+<p>这让我想到了，我们应该反馈下<span class="math inline">\(\alpha和\beta\)</span>的p value，否则很高的<span class="math inline">\(\alpha和\beta\)</span>，但是显著水平低，我们也不能进我们的篮子里面。</p>
+<p>昨天我记得要分别传模型的预测值<span class="math inline">\(\hat y_{i,t}\)</span>，作为另一个模型的<span class="math inline">\(x\)</span>变量，我们这里应该把<span class="math inline">\(\hat y\)</span>的p value也反馈了。因为似乎我们选择少的时间，比如11期，可以得到很好的<span class="math inline">\(\hat y\)</span>，但是不一定显著的，我们还要看看我们的<span class="math inline">\(\hat y\)</span>的显著水平，我猜想，我们选择少的时间，必然p值不高，我们可以在这上做一些权衡。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidystringdist)
+code_comb &lt;-<span class="st"> </span>
+full_data_ipt_miss_add_return <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">distinct</span>(code) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>.<span class="op">$</span>code <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">tidy_comb_all</span>()</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">return_spread &lt;-<span class="st"> </span>
+full_data_ipt_miss_add_return <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(rank,code,return) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">spread</span>(code,return) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>rank)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">code_comb_cor &lt;-<span class="st"> </span>
+code_comb <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">pmap</span>(<span class="op">~</span><span class="st"> </span><span class="kw">cor.test</span>(return_spread[[.x]], return_spread[[.y]])) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">map_df</span>(broom<span class="op">::</span>tidy) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">bind_cols</span>(code_comb, .)</code></pre></div>
+<ul>
+<li><code>estimate</code>: 相关系数<span class="math inline">\(\rho\)</span></li>
+<li><code>statistic</code>: 显著值，类似于t-value</li>
+<li><code>p.value</code>: 显著水平, p-value，越小越好。</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">code_comb_cor <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">write_csv</span>(<span class="kw">file.path</span>(<span class="st">&quot;data&quot;</span>,<span class="st">&quot;round3_files&quot;</span>,<span class="st">&quot;code_comb_cor.csv&quot;</span>))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(pryr)
+<span class="kw">object_size</span>(code_comb_cor)</code></pre></div>
+</div>
+</div>
+</div>
+<div id="section-4" class="section level1">
+<h1><span class="header-section-number">4</span> 检验模型效果</h1>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">test_data &lt;-<span class="st"> </span>
+full_data_ipt_miss_wo_scale <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(rank <span class="op">&gt;</span><span class="st"> </span><span class="dv">235</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(rank,code,return)</code></pre></div>
+<p>这里<span class="math inline">\(t \in [1,353]\)</span>，其中<span class="math inline">\(t \in [236,353]\)</span>作为测试组。</p>
+<div id="geometric-mean-return" class="section level2">
+<h2><span class="header-section-number">4.1</span> <code>Geometric Mean Return</code></h2>
+<p><span class="math display">\[\bar r_g = \prod_{i=1}^{353}(1+r_i)-1\]</span></p>
+<p>idea主要参考 <span class="citation">Boudt, Dirick, and Parry (n.d.)</span>， 构建参考: <a href="https://stackoverflow.com/questions/2602583/geometric-mean-is-there-a-built-in">r - Geometric Mean: is there a built-in? - Stack Overflow</a></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">gmean_r &lt;-<span class="st"> </span><span class="cf">function</span>(x){(<span class="kw">exp</span>(<span class="kw">mean</span>(<span class="kw">log</span>(x<span class="op">/</span><span class="dv">100</span><span class="op">+</span><span class="dv">1</span>)))<span class="op">-</span><span class="dv">1</span>)<span class="op">*</span><span class="dv">100</span>}</code></pre></div>
+<p>这里的<code>x</code>的单位是<code>%</code></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">model_proc &lt;-<span class="st"> </span><span class="cf">function</span>(x){
+  x &lt;-<span class="st"> </span><span class="kw">file.path</span>(<span class="st">&quot;round2_files&quot;</span>,x)
+code_blanket &lt;-<span class="st"> </span>
+<span class="st">  </span><span class="kw">read_csv</span>(x) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(code)
+model_table  &lt;-<span class="st"> </span>
+<span class="st">  </span>code_blanket <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">left_join</span>(test_data,<span class="dt">by=</span><span class="st">&quot;code&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(code,rank,return)
+model_perf &lt;-<span class="st"> </span>
+<span class="st">  </span>model_table <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="kw">gmean_r</span>(return)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">pull</span>()
+model_perf_text &lt;-<span class="st"> </span><span class="kw">paste</span>(x,<span class="st">&quot;:&quot;</span>,<span class="kw">as.character</span>(<span class="kw">round</span>(model_perf<span class="op">*</span><span class="dv">10000</span>)<span class="op">/</span><span class="dv">10000</span>),<span class="st">&quot;%&quot;</span>)
+<span class="kw">return</span>(<span class="kw">list</span>(code_blanket,model_table,model_perf_text))
+}</code></pre></div>
+<p><code>model_proc</code>是一个<code>list</code>，第一项是选择的code，第二项是left join的<code>rank</code>和<code>return</code>后的表，第三项是平均收益率。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">naive_<span class="dv">30</span>           &lt;-<span class="st"> </span><span class="kw">model_proc</span>(<span class="st">&quot;naive_30.csv&quot;</span>)
+naive_30_<span class="fl">2.0</span>       &lt;-<span class="st"> </span><span class="kw">model_proc</span>(<span class="st">&quot;naive_30_2.0.csv&quot;</span>)
+naive_30_<span class="fl">3.0</span>       &lt;-<span class="st"> </span><span class="kw">model_proc</span>(<span class="st">&quot;naive_30_3.0.csv&quot;</span>)
+naive_30_<span class="fl">4.0</span>       &lt;-<span class="st"> </span><span class="kw">model_proc</span>(<span class="st">&quot;naive_30_4.0.csv&quot;</span>)
+mu_sigma_<span class="dv">30</span>        &lt;-<span class="st"> </span><span class="kw">model_proc</span>(<span class="st">&quot;mu_sigma_30.csv&quot;</span>)
+<span class="co"># biglm_alpha_top_30 &lt;- model_proc(&quot;biglm_alpha_top_30.csv&quot;)</span>
+<span class="co"># biglm_alpha_top_30_return_only &lt;- model_proc(&quot;biglm_alpha_top_30_return_only.csv&quot;)</span>
+<span class="co"># wu_20180401        &lt;- model_proc(&quot;wu_20180401.csv&quot;)</span>
+<span class="co"># wu_20180402        &lt;- model_proc(&quot;wu_20180402.csv&quot;)</span>
+<span class="co"># wu_20180402_2      &lt;- model_proc(&quot;wu_20180402_2.csv&quot;)</span>
+<span class="co"># wu_20180404        &lt;- model_proc(&quot;wu_20180404.csv&quot;)</span>
+<span class="co"># wu_20180405        &lt;- model_proc(&quot;wu_20180405.csv&quot;)</span>
+<span class="co"># xiaosong_20180405  &lt;- model_proc(&quot;xiaosong_20180405.csv&quot;)</span>
+xgboost_<span class="dv">30</span>         &lt;-<span class="st"> </span><span class="kw">model_proc</span>(<span class="st">&quot;xgboost_30.csv&quot;</span>)
+history_ensemble   &lt;-<span class="st"> </span><span class="kw">model_proc</span>(<span class="st">&quot;history_ensemble.csv&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">naive_<span class="dv">30</span>[[<span class="dv">3</span>]]
+naive_30_<span class="fl">2.0</span>[[<span class="dv">3</span>]]
+naive_30_<span class="fl">3.0</span>[[<span class="dv">3</span>]]
+naive_30_<span class="fl">4.0</span>[[<span class="dv">3</span>]]
+mu_sigma_<span class="dv">30</span>[[<span class="dv">3</span>]]
+<span class="co"># biglm_alpha_top_30[[3]]</span>
+<span class="co"># biglm_alpha_top_30_return_only[[3]]</span>
+<span class="co"># wu_20180401[[3]]</span>
+<span class="co"># wu_20180402[[3]]</span>
+<span class="co"># wu_20180402_2[[3]]</span>
+<span class="co"># wu_20180404[[3]]</span>
+<span class="co"># wu_20180405[[3]]</span>
+<span class="co"># xiaosong_20180405[[3]]</span>
+xgboost_<span class="dv">30</span>[[<span class="dv">3</span>]]
+<span class="co"># history_ensemble[[3]]</span></code></pre></div>
+<p>我验证了一波，的确第一次的收益率在测试组中是最高的，37%%半年收益率。我发现，单规则粗暴一点效果还可以， 但是加入X后，不能粗暴的跑<code>biglm</code>，结果非常差，收益率几乎为0. 跑模型一定要精细化。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">add_name &lt;-<span class="st"> </span><span class="cf">function</span>(x,y){
+  x[[<span class="dv">1</span>]] <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">type =</span> y)
+}</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">code_selection_by_all_model_long &lt;-<span class="st"> </span>
+<span class="kw">bind_rows</span>(
+<span class="kw">add_name</span>(naive_<span class="dv">30</span>,<span class="st">&quot;naive_30&quot;</span>),
+<span class="kw">add_name</span>(naive_30_<span class="fl">2.0</span>,<span class="st">&quot;naive_30_2.0&quot;</span>),
+<span class="kw">add_name</span>(naive_30_<span class="fl">3.0</span>,<span class="st">&quot;naive_30_3.0&quot;</span>),
+<span class="kw">add_name</span>(naive_30_<span class="fl">3.0</span>,<span class="st">&quot;naive_30_4.0&quot;</span>),
+<span class="kw">add_name</span>(mu_sigma_<span class="dv">30</span>,<span class="st">&quot;mu_sigma_30&quot;</span>),
+<span class="co"># add_name(biglm_alpha_top_30,&quot;biglm_alpha_top_30_code&quot;),</span>
+<span class="co"># add_name(biglm_alpha_top_30_return_only,&quot;biglm_alpha_top_30_code_return_only&quot;),</span>
+<span class="co"># add_name(wu_20180401,&quot;wu_20180401&quot;),</span>
+<span class="co"># add_name(wu_20180402,&quot;wu_20180402&quot;),</span>
+<span class="kw">add_name</span>(xgboost_<span class="dv">30</span>,<span class="st">&quot;xgboost_30&quot;</span>),
+<span class="kw">add_name</span>(history_ensemble,<span class="st">&quot;history_ensemble&quot;</span>)
+)
+code_selection_by_all_model_wide &lt;-<span class="st"> </span>
+code_selection_by_all_model_long <span class="op">%&gt;%</span><span class="st">  </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">value =</span> <span class="dv">1</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">spread</span>(type,value)</code></pre></div>
+</div>
+<div id="section-4.2" class="section level2">
+<h2><span class="header-section-number">4.2</span> 历史平均法</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">history_ensemble &lt;-<span class="st"> </span>
+code_selection_by_all_model_long <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(code) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">count</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(n)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">top_n</span>(<span class="dv">30</span>,n) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">write_csv</span>(<span class="kw">file.path</span>(<span class="st">&quot;data&quot;</span>,<span class="st">&quot;round3_files&quot;</span>,<span class="st">&quot;history_ensemble.csv&quot;</span>))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">history_perf &lt;-<span class="st"> </span>
+test_data <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(code) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">mean =</span> <span class="kw">mean</span>(return),<span class="dt">sd =</span> <span class="kw">sd</span>(return)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(mean),sd) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">left_join</span>(code_selection_by_all_model_wide, <span class="dt">by =</span> <span class="st">&quot;code&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">write_csv</span>(<span class="kw">file.path</span>(<span class="st">&quot;data&quot;</span>,<span class="st">&quot;round3_files&quot;</span>,<span class="st">&quot;history_perf.csv&quot;</span>))
+history_perf <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">head</span>(<span class="dv">10</span>)</code></pre></div>
+<p>这里的<code>mean</code>表示测试组中，平均收益率，<code>sd</code>是对应的标准差， 这里按照从高到低先排序<code>mean</code>，再从低到高排序<code>sd</code>。 <code>type*</code>表示四种方法是否选择这些股，理论上越好的选择，越选择靠前的股票。</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">save.image</span>()</code></pre></div>
+</div>
+</div>
+<div id="section-5" class="section level1">
+<h1><span class="header-section-number">5</span> 其他</h1>
+<div id="render" class="section level2">
+<h2><span class="header-section-number">5.1</span> <code>render</code>格式</h2>
+<pre><code>output: 
+  html_document: 
+    highlight: tango
+    number_sections: yes
+    printed: paged
+    theme: united
+    toc: yes
+    toc_float: yes
+    
+    
+output: 
+  bookdown::gitbook:
+    split_by: none
+    self_contained: FALSE
+    df_print: paged
+
+output:
+    bookdown::gitbook</code></pre>
+<p>这样是可以显示数学公式的，但是会产生好几个<code>html</code>文件，不方便。</p>
+</div>
+</div>
+<div id="e58f82e88083e69687e78cae" class="section level1 unnumbered">
+<h1>参考文献</h1>
+<div id="refs" class="references">
+<div id="ref-bennett_hugen_2016">
+<p>Bennett, Mark J., and Dirk L. Hugen. 2016. <em>Financial Analytics with R: Building a Laptop Laboratory for Data Science</em>. Cambridge University Press. doi:<a href="https://doi.org/10.1017/CBO9781316584460">10.1017/CBO9781316584460</a>.</p>
+</div>
+<div id="ref-BoudtIntro">
+<p>Boudt, Kris, Lore Dirick, and Josiah Parry. n.d. “Https://Www.datacamp.com/Courses/Introduction-to-Portfolio-Analysis-in-R.” DataCamp.</p>
+</div>
+<div id="ref-Box1964An">
+<p>Box, G. E. P., and D. R. Cox. 1964. “An Analysis of Transformations.” <em>Journal of the Royal Statistical Society</em> 26 (2): 211–52.</p>
+</div>
+<div id="ref-TSA">
+<p>Chan, Kung-Sik, and Brian Ripley. 2012. <em>TSA: Time Series Analysis</em>. <a href="https://CRAN.R-project.org/package=TSA" class="uri">https://CRAN.R-project.org/package=TSA</a>.</p>
+</div>
+<div id="ref-Conway2012Machine">
+<p>Conway, Drew, and John White. 2012. <em>Machine Learning for Hackers Case Studies and Algorithms to Get You Started</em>. O’Reilly Media. <a href="http://shop.oreilly.com/product/0636920018483.do" class="uri">http://shop.oreilly.com/product/0636920018483.do</a>.</p>
+</div>
+<div id="ref-DataCastle">
+<p>DataCastle小运营. 2018. “【赛事Q&amp;A】凤凰金融量化投资大赛.” <a href="http://www.dcjingsai.com/common/bbs/topicDetails.html?tid=1033" class="uri">http://www.dcjingsai.com/common/bbs/topicDetails.html?tid=1033</a>.</p>
+</div>
+<div id="ref-Hilpisch2014Python">
+<p>Hilpisch, Yves. 2014. <em>Python for Finance: Analyze Big Financial Data</em>. O’Reilly Media, Inc.</p>
+</div>
+<div id="ref-Kleiber2008Applied">
+<p>Kleiber, Christian, and Achim Zeileis. 2008. <em>Applied Econometrics with R</em>. Springer New York.</p>
+</div>
+<div id="ref-Jiaxiangtidyquant">
+<p>Li, Jiaxiang. 2018. “Tidyquant 使用技巧.” <a href="https://jiaxiangli.netlify.com/2018/04/tidyquant" class="uri">https://jiaxiangli.netlify.com/2018/04/tidyquant</a>.</p>
+</div>
+<div id="ref-Nicholson2011Microeconomic">
+<p>Nicholson, Walter, and Christopher Snyder. 2011. “Microeconomic Theory: Basic Principles and Extensions, 11th Edition” 44 (4): 370–72.</p>
+</div>
+<div id="ref-Schutt2013Doing">
+<p>Schutt, Rachel, and Cathy O’Neil. 2013. <em>Doing Data Science: Straight Talk from the Frontline</em>. O’Reilly Media, Inc.</p>
+</div>
+<div id="ref-Wickham2014Advanced">
+<p>Wickham, Hadley. 2014. <em>Advanced R</em>. Chapman; Hall/CRC.</p>
+</div>
+<div id="ref-Wickham2017R">
+<p>Wickham, Hadley, and Garrett Grolemund. 2017. <em>R for Data Science: Import, Tidy, Transform, Visualize, and Model Data</em>. O’Reilly Media, Inc.</p>
+</div>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p><a href="https://stackoverflow.com/questions/48025994/summarize-with-conditions-and-implicit-column-names-in-dplyr">r - Summarize with conditions and implicit column names in dplyr - Stack Overflow</a><a href="#fnref1">↩</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+},
+"search": false
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
