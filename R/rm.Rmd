@@ -1,0 +1,9 @@
+```{r}
+source("load.R")
+```
+
+```{r}
+file_delete("../a20190131183823.Rmd")
+dir_delete("../a20190131183352_cache/")
+```
+
