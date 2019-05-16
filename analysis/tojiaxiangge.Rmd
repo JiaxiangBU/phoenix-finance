@@ -1,0 +1,301 @@
+---
+title: "待验证"
+author: "靳晓松"
+date: "2018年4月26日"
+output: 
+  html_document:
+    toc: yes
+    fig_width: 7
+    fig_height: 4.5
+    theme: cosmo
+    highlight: tango
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(broom)
+library(tidyverse)
+```
+
+
+
+目的就是能找出为什么返回的组合不同。
+
+
+### 读取数据.
+```{r eval=F}
+
+# setwd("E:/NEW_R/datasets/competition/round_second")
+
+all_data <- 
+  read_csv("round2.2_full_data_ipt_miss_wo_scale_part1.csv") %>%
+  bind_rows(read_csv("round2.2_full_data_ipt_miss_wo_scale_part2.csv")) %>%
+  select(rank:return) %>%
+  arrange(code) %>%
+  left_join(read_csv("round2.2_pca_index_table.csv") %>% 
+              mutate(rank = 1:353) %>%
+              select(rank, PC1_return), by = "rank") %>%
+  write_csv("round2.2_full_data_ipt_miss_wo_scale_pca.csv")
+```
+
+all_data: 左连接了你新给出的PC1的数据 
+注意：你新给的PC1的数据的名称我自己保存的时候重命名为了"round2.2_pca_index_table.csv"
+也就是说我读取数据这一步没有问题。
+
+### 建立回归模型
+
+```{r eval=F}
+get_alpha_beta_pvalue <- function(x, start, end) {
+  x %>% 
+    select(rank, code, return, PC1_return) %>% 
+    filter(rank >= 343 & rank <= 353) %>%
+    group_by(code) %>% 
+    nest() %>% 
+    
+    mutate(model = map(.x = data, .f = ~ lm(return ~ PC1_return, data = .x)),
+           output = map(.x = model, .f = ~ tidy(.))) %>% 
+    
+    select(code, output) %>% 
+    unnest() %>% 
+    select(code, term, estimate, p.value) %>% 
+    gather(metric, value, estimate:p.value) %>% 
+    unite("type", c("term", "metric")) %>% 
+    spread(type, value) %>% 
+    rename_all(
+      funs(
+        str_replace_all(.,"\\(Intercept\\)","alpha") %>% 
+          str_replace_all(.,"estimate","value") %>% 
+          str_replace_all(.,"PC1_return","beta")
+      )
+    )
+}
+
+data_alpha_beta_pvalue <- 
+  get_alpha_beta_pvalue(all_data) %>% 
+  write_csv("data_alpha_beta_pvalue.csv")
+
+data_alpha_beta_pvalue %>%
+  select(alpha_value:beta_p.value) %>%
+  summarise_all(funs(min(.), max(.))) %>%
+  gather() %>%
+  write_csv("data_alpha_beta_pvalue_gather.csv")
+
+```
+
+> 上面的操作也应该没有问题，因为与之前我写的那个loop返回的模型方程一样。唯一不同就是这个返回827行，即每只股票对应一个回归方程。当时那个loop返回827*353行，因为其存在y_real和 y_hat，导致alpha 和 beta 都重复了353次。
+
+> 另外，这是我使用个你的那个代码。只不过我先合并的数据在调用的函数，你的代码是在封装的函数中合并的数据。
+
+```{r eval=F}
+data_alpha_beta_pvalue_gather <- read_csv("data_alpha_beta_pvalue_gather.csv")
+data_alpha_beta_pvalue <- read_csv("data_alpha_beta_pvalue.csv")
+all_data <- read_csv("round2.2_full_data_ipt_miss_wo_scale_pca.csv")
+```
+
+
+
+```{r eval=F}
+all_data %>% 
+  filter(rank >= 343 & rank <= 353) %>% 
+  filter(code %in% NaN_code[1:2]) %>%
+  split(.$code) %>% 
+  map(.x = ., ~lm(return ~ PC1_return, data = .x)) %>% 
+  map(~summary(.x)$coefficients)
+```
+
+`summary` 函数的求解是没有问题的，那么就是`tidy`函数的问题了。
+
+函数重新封装，换`summary`函数。
+
+```{r}
+all_data %>% 
+  filter(code %in% NaN_code[1]) %>% 
+  filter(rank >= 343 & rank <= 353) %>% 
+  lm(return ~ PC1_return, data = .) %>% 
+  summary() %>% 
+  .$coefficients
+```
+
++ `stock100310`
++ `rank >= 343 & rank <= 353`
+
+```{r}
+get_alpha_beta_pvalue2.0 <- function(x, start=343, end=353) {
+x %>% 
+  filter(rank >= start & rank <= end) %>%
+  # filter(code %in% NaN_code[1:2]) %>%
+  split(.$code) %>% 
+  map(.x = ., ~lm(return ~ PC1_return, data = .x)) %>% 
+  map(~summary(.x)$coefficients) %>% 
+  as.data.frame() %>% 
+  add_rownames() %>% 
+  gather_(
+    key_col = "key",
+    value_col = "value",
+    gather_cols = names(.) %>% str_subset("stock")) %>% 
+  # anyNA()
+  # 没有空值了
+  filter(!key %in% str_subset(key,"Std..Error|t.value")) %>% 
+  mutate(
+    rowname = fct_recode(rowname,alpha = "(Intercept)",beta = "PC1_return"),
+    key = str_replace_all(key,"Estimate","value"),
+    key = str_replace_all(key,"Pr...t..","p_value")
+  ) %>% 
+  separate(col = "key",into = c("code","type"),sep = "\\.") %>% 
+  unite(col = "type",c("rowname","type")) %>% 
+  spread(type,value)
+  # anyNA()
+}
+```
+
+
+### 股票组合筛选.
+```{r eval=F}
+
+best_target <- function(data, n) {
+  
+  set.seed(456)
+  
+  ## 不放回的抽取n(20-50)支股票进行组合，分别模拟1000次
+  alpha_beta_xiaosong_343_353_20180426_sum_resample <- 
+    replicate(1000, sample_n(data, n)) %>% 
+    t() %>% 
+    as.data.frame() %>% 
+    add_column(index = 1:1000) %>% 
+    unnest()
+  
+  ## 按照index分组，分别统计组合中的alpha和beta的均值和sharp(target)
+  alpha_beta_xiaosong_343_353_20180426_sum_resample_output <- 
+    alpha_beta_xiaosong_343_353_20180426_sum_resample %>% 
+    group_by(index) %>% 
+    summarise(alpha_value = mean(alpha_value), 
+              beta_value = mean(beta_value),
+              target = alpha_value / abs(beta_value)) %>% 
+    arrange(desc(target))
+  
+  ## 挑选出...resample中target最高的股票的alpha & beta
+  alpha_beta_xiaosong_343_353_20180426_sum_resample_output %>% 
+    head(1) %>% 
+    select(index) %>% 
+    left_join(
+      alpha_beta_xiaosong_343_353_20180426_sum_resample,
+      by = "index"
+    )
+}
+
+
+alpha_beta_xiaosong_343_353_20180426_best_sample <- 
+  data_frame(best_n = 20:50) %>% 
+  mutate(data = map(
+    .x = best_n,
+    .f = function(n) { best_target(data_alpha_beta_pvalue, n) }
+  ))
+
+
+alpha_beta_xiaosong_343_353_20180426_best_sample %>% 
+  mutate(target = map(.x = data,
+                      .f = function(x) {
+                        x %>% 
+                          summarise(
+                            alpha_value = mean(alpha_value), 
+                            beta_value = mean(beta_value),
+                            target = alpha_value / abs(beta_value)) %>% 
+                          select(target)
+                      })) %>% 
+  select(best_n, target) %>% 
+  unnest() %>% 
+  arrange(desc(target)) %>% 
+  head()
+
+
+alpha_beta_xiaosong_343_353_20180426_best_sample %>% 
+  filter(best_n == 20) %>% 
+  select(data) %>% 
+  unnest() %>% 
+  write_csv("alpha_beta_xiaosong_343_353_20180426_best_sample.csv")
+
+```
+
+
+上面的代码都是你的那个封装的函数，需要改的也就是那个best_n。因为上面返回的best_n是20，所以我选择20返回了结果。下面就是重复的那个数据返回的最佳组合结果。
+
+
+### 重复数据的股票筛选.
+```{r eval=F}
+## 读取数据(此数据就是重复的数据)
+alpha_beta_xiaosong_343_353_20180424 <- 
+  read_csv("alpha_beta_xiaosong_343_353_20180424.csv")
+
+## 封装函数
+best_target <- function(data, n) {
+  
+  set.seed(456)
+  
+  ## 不放回的抽取n(20-50)支股票进行组合，分别模拟1000次
+  alpha_beta_xiaosong_343_353_20180425_sum_resample <- 
+    replicate(1000, sample_n(data, n)) %>% 
+    t() %>% 
+    as.data.frame() %>% 
+    add_column(index = 1:1000) %>% 
+    unnest()
+  
+  ## 按照index分组，分别统计组合中的alpha和beta的均值和sharp(target)
+  alpha_beta_xiaosong_343_353_20180425_sum_resample_output <- 
+    alpha_beta_xiaosong_343_353_20180425_sum_resample %>% 
+    group_by(index) %>% 
+    summarise(alpha = mean(alpha), 
+              beta = mean(beta),
+              target = alpha/abs(beta)) %>% 
+    arrange(desc(target))
+  
+  ## 挑选出...resample中target最高的股票的alpha & beta
+  alpha_beta_xiaosong_343_353_20180425_sum_resample_output %>% 
+    head(1) %>% 
+    select(index) %>% 
+    left_join(
+      alpha_beta_xiaosong_343_353_20180425_sum_resample,
+      by = "index"
+    )
+}
+
+## 执行上面的那个封装函数
+alpha_beta_xiaosong_343_353_20180424_best_sample <- 
+  data_frame(best_n = 20:50) %>% 
+  mutate(data = map(
+    .x = best_n,
+    .f = function(n) { best_target(alpha_beta_xiaosong_343_353_20180424, n) }
+  ))
+
+## 查看组合最好的股票对应的模拟索引
+alpha_beta_xiaosong_343_353_20180424_best_sample %>% 
+  mutate(target = map(.x = data,
+                      .f = function(x) {
+                        x %>% 
+                          summarise(
+                            alpha = mean(alpha), 
+                            beta = mean(beta),
+                            target = alpha/abs(beta)) %>% 
+                          select(target)
+                      })) %>% 
+  select(best_n, target) %>% 
+  unnest() %>% 
+  arrange(desc(target)) %>% 
+  head()
+
+## 挑选最好的股票组合（best_n = 21）
+alpha_beta_xiaosong_343_353_20180424_best_sample %>% 
+  filter(best_n == 21) %>% 
+  select(data) %>% 
+  unnest() %>%
+  write_csv("alpha_beta_xiaosong_343_353_20180424_best_sample.csv")
+
+```
+
+
+
+上面返回的结果就是从重复的数据中使用封装的函数挑选出的股票组合，发现与不重复数据返回的不同。
+
+这里面的alpha、beta与上面的alpha_value、beta_value的意义是一样的，只不过名字不同而已。
+
+
+
