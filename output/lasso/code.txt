@@ -1,0 +1,29 @@
+#### 设定工作路径
+setwd("E:/NEW_R/datasets/competition")
+
+
+#### 加载程序包
+library(tidyverse)
+
+
+#### 读取数据
+lag_data <- read_csv("data_lag_y_15.csv")
+
+
+####
+lag_data_1 <- 
+  lag_data %>%
+  filter(code == "stock100010") %>%
+  select(-(rank:code)) %>%
+  na.omit()
+
+source("lasso.adapt.bic2.txt")
+
+out1 <- lasso.adapt.bic2(x = lag_data_1[2:16], y = lag_data_1$return)
+
+names(out1)
+
+out1$fit %>% length()
+
+out1$object
+out1$mse
