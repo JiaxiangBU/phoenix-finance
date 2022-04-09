@@ -22,9 +22,9 @@ knitr::opts_chunk$set(
 1. 比赛中，做了多个模型进行尝试，但是sense不够强，最后只止步于入围，b榜第28名，[链接这里](http://www.dcjingsai.com/static_page/m/cp_rank.html?cmptId=204)。
 1. 比赛排名如下
 
-![](https://raw.githubusercontent.com/JiaxiangBU/picbackup/master/DataCastleRanking.png)
+![](figure/DataCastleRanking.png)
 
-![](https://raw.githubusercontent.com/JiaxiangBU/picbackup/master/DataCastleAward.png)
+![](figure/DataCastleAward.png)
 
 ### 实现方式
 
