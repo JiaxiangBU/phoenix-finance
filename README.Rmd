@@ -50,6 +50,21 @@ knitr::opts_chunk$set(
 [预测值迁移](https://jiaxiangbu.github.io/channel_valuation/about)
 的问题。
 
+```{comment}
+"DraftsExport-2022-04-10-01-08.Rmd"
+```
+但是考虑当时比赛[@phoenixfinance2018stock]，需要选择 top 50 的股票，这个预测思路类似 @bali2020the 的多空策略，
+
+对每只股票估计OOT的收益率，然后切分10等分，对大盘卖出 bottom 10%，买入 top 10%。
+
+但是初赛的表现期其实和训练集上的可能不是平稳的。这个问题可以拆解，
+
+- 参考稳定学习[@cui2022stable]的思想，在训练集多做几个验证集，然后选择稳定在 top 50 的股票
+- 参考 conformal inference 的方式，找到训练集中那个时期和测试集最相似，然后关注训练集这个时期的 top 50 的股票
+
+然后把交集作为输出。
+
+
 ### 其他
 
 readme 格式参考[github](https://github.com/JiaxiangBU/phv)
